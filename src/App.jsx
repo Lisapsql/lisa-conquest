@@ -374,12 +374,12 @@ function WelcomeScreen({onYes, onNo}) {
   return (
     <div style={PAGE}>
       <div style={CARD}>
-        <div style={{fontSize:"3.5rem",marginBottom:"10px",display:"inline-block",animation:"pulse 1.5s infinite"}}>💖</div>
-        <div style={{...TITLE, fontSize:"1.6rem"}}>Bienvenue sur la Conquête de Lisouille ✨</div>
-        <div style={SUB}>Une quête épique vous attend, courageux prétendant(e).<br/>Êtes-vous prêt(e) à relever le défi ?</div>
+        <div style={{fontSize:"3rem",marginBottom:"10px",display:"inline-block",animation:"pulse 1.5s infinite"}}>❤️🔥</div>
+        <div style={{...TITLE, fontSize:"1.5rem"}}>Voulez-vous séduire la jolie petite Lisouille ?</div>
+        <div style={SUB}>⚔️ Une quête épique vous attend, valeureux prétendant.<br/>Êtes-vous prêt à relever les défis ?</div>
         <div style={{display:"flex",justifyContent:"center",flexWrap:"wrap"}}>
-          <button style={btn("pink")} onClick={onYes}>💪 Oui, je tente ma chance !</button>
-          <button style={btn("gray")} onClick={onNo}>Non merci...</button>
+          <button style={btn("pink")} onClick={onYes}>Oui, je tente ma chance</button>
+          <button style={btn("gray")} onClick={onNo}>Non merci…</button>
         </div>
       </div>
       <style>{`@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}`}</style>
@@ -391,9 +391,13 @@ function NoScreen({onBack}) {
   return (
     <div style={PAGE}>
       <div style={CARD}>
-        <div style={{fontSize:"4rem",marginBottom:"12px"}}>💔👺👹</div>
-        <div style={TITLE}>Bah… génial, merci !</div>
-        <div style={SUB}>Vous avez choisi la voie de la lâcheté 😤<br/>Lisa est très déçue de vous.</div>
+        <div style={{fontSize:"3.5rem",marginBottom:"12px"}}>💔👺👹😤</div>
+        <div style={TITLE}>Très bien…</div>
+        <div style={SUB}>
+          De toute façon, Lisa n'avait pas besoin<br/>
+          de quelqu'un d'aussi lâche que vous. 😤<br/><br/>
+          <span style={{fontSize:"0.85rem",color:"#c084fc"}}>Elle ira manger des ramen au Japon sans vous. 🍜🇯🇵</span>
+        </div>
         <button style={btn("pink")} onClick={onBack}>← En fait… je change d'avis !</button>
       </div>
     </div>
@@ -854,7 +858,7 @@ function GameFlappy({ onSuccess }) {
   const [phase, setPhase] = useState("intro");
   const [score, setScore] = useState(0);
 
-  const GRAVITY=0.22, JUMP=-4.2, PIPE_W=44, GAP=210, PIPE_SPEED=1.6;
+  const GRAVITY=0.22, JUMP=-4.2, PIPE_W=48, GAP=185, PIPE_SPEED=1.9;
 
   const initState = (img) => ({
     bird: { x:80, y:FLAPPY_H/2, vy:0, angle:0 },
@@ -899,7 +903,8 @@ function GameFlappy({ onSuccess }) {
         const topH = 60 + Math.random() * (FLAPPY_H - GAP - 120);
         s.pipes.push({ x: FLAPPY_W + PIPE_W, topH, scored:false });
       }
-      s.pipes.forEach(p => p.x -= PIPE_SPEED);
+      const currentSpeed = PIPE_SPEED + (s.score >= 5 ? (s.score - 4) * 0.25 : 0);
+      s.pipes.forEach(p => p.x -= currentSpeed);
       s.pipes = s.pipes.filter(p => p.x > -PIPE_W - 10);
 
       // Score
