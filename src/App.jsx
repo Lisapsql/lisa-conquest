@@ -375,7 +375,7 @@ function WelcomeScreen({onYes, onNo}) {
     <div style={PAGE}>
       <div style={CARD}>
         <div style={{fontSize:"3.5rem",marginBottom:"10px",display:"inline-block",animation:"pulse 1.5s infinite"}}>💖</div>
-        <div style={{...TITLE, fontSize:"1.6rem"}}>Bienvenue sur la conquête de Lisouille ✨</div>
+        <div style={{...TITLE, fontSize:"1.6rem"}}>Bienvenue sur la Conquête de la Belle Lisa P. ✨</div>
         <div style={SUB}>Une quête épique vous attend, courageux prétendant(e).<br/>Êtes-vous prêt(e) à relever le défi ?</div>
         <div style={{display:"flex",justifyContent:"center",flexWrap:"wrap"}}>
           <button style={btn("pink")} onClick={onYes}>💪 Oui, je tente ma chance !</button>
@@ -642,9 +642,9 @@ const WRONG_ACTIVITIES = [
 
 function Game2b({ onSuccess }) {
   // Pool: correct + wrong, shuffled
-  const [pool, setPool]     = useState(() => [...CORRECT_ORDER, ...WRONG_ACTIVITIES].sort(() => Math.random() - 0.5));
-  // 6 slots: null = empty
-  const [slots, setSlots]   = useState(Array(6).fill(null));
+  const [pool, setPool]     = useState(() => [...CORRECT_ORDER, ...WRONG_ACTIVITIES].filter(a => a.id !== "dejeuner").sort(() => Math.random() - 0.5));
+  // 6 slots: slot 0 pre-filled with dejeuner
+  const [slots, setSlots]   = useState([CORRECT_ORDER[0], null, null, null, null, null]);
   const [dragging, setDragging] = useState(null); // {item, from: "pool"|slotIdx}
   const [dragPos, setDragPos]   = useState({x:0, y:0});
   const [feedback, setFeedback] = useState(null);
@@ -746,8 +746,8 @@ function Game2b({ onSuccess }) {
   };
 
   const reset = () => {
-    setPool([...CORRECT_ORDER, ...WRONG_ACTIVITIES].sort(() => Math.random() - 0.5));
-    setSlots(Array(6).fill(null));
+    setPool([...CORRECT_ORDER, ...WRONG_ACTIVITIES].filter(a => a.id !== "dejeuner").sort(() => Math.random() - 0.5));
+    setSlots([CORRECT_ORDER[0], null, null, null, null, null]);
     setFeedback(null);
   };
 
@@ -799,7 +799,12 @@ function Game2b({ onSuccess }) {
                 ? <span style={{fontSize:"0.85rem",fontWeight:"700",color:"#7c3aed",flex:1,textAlign:"left"}}>{slot.label}</span>
                 : <span style={{fontSize:"0.8rem",color:"#d8b4fe",fontStyle:"italic",flex:1,textAlign:"left"}}>Glisse ici…</span>
               }
-              {slot && <span style={{color:"#c084fc",fontSize:"0.9rem"}}>✕</span>}
+              {slot && (
+                <span
+                  onMouseDown={e => { e.stopPropagation(); const newSlots=[...slots]; newSlots[i]=null; setSlots(newSlots); setPool(p=>[...p,slot]); setFeedback(null); }}
+                  onTouchStart={e => { e.stopPropagation(); const newSlots=[...slots]; newSlots[i]=null; setSlots(newSlots); setPool(p=>[...p,slot]); setFeedback(null); }}
+                  style={{color:"#c084fc",fontSize:"0.9rem",cursor:"pointer",padding:"4px",flexShrink:0}}>✕</span>
+              )}
             </div>
           ))}
         </div>
@@ -1104,7 +1109,7 @@ function FinalScreen() {
             Bravo !
           </div>
           <div style={{color:"#7c3aed",fontSize:"1rem",lineHeight:"1.6"}}>
-            Vous avez séduit <strong>Lisa P.</strong> 😭❤️<br/>
+            Vous avez séduit <strong>Lilou</strong> 😭❤️<br/>
             Vous êtes désormais <strong>EN COUPLE</strong> avec elle !
           </div>
           <div style={{fontSize:"2rem",marginTop:"12px"}}>🍣🍜🏋️‍♀️❤️📖🎹</div>
@@ -1127,8 +1132,8 @@ function FinalScreen() {
             background:"linear-gradient(135deg,#fce7f3,#f3e8ff)", border:"2px solid #f9a8d4",
             fontSize:"1.1rem", color:"#b03080", fontWeight:"bold",
           }}>
-            😘💋 Vous pouvez vous embrasser !<br/>
-            <span style={{fontSize:"1.5rem"}}>🎊💍💏🎊</span>
+            😘 Vous pouvez vous embrasser !<br/>
+            <span style={{fontSize:"1.5rem"}}>💍💏🎊</span>
           </div>
         ) : (
           <div style={{
