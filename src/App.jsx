@@ -261,10 +261,22 @@ const svgToDataUrl = (svg) => `data:image/svg+xml;base64,${btoa(unescape(encodeU
 //  DATA
 // ══════════════════════════════════════════════════════
 const PROFILES = [
-  { avatarIdx:0, name:"24 ans", bio:"Militante à temps plein 🌈✊ • Vegane depuis le ventre de ma mère 🥦 • J'ai bloqué mon père sur insta pour mansplaining • Mon chat s'appelle Simone de Beauvoir 🐱 • Chercheuse en études de genre à Paris 8\n\n🚬 Clope bio équitable only • 🍺 Boit du kombucha militant • 🔮 Wicca & féminisme spirituel • 🗳️ Extrême gauche (NPA c'est trop modéré)", match:false },
-  { avatarIdx:1, name:"25 ans", bio:"Amoureuse des chevaux 🐴 et des hommes qui ressemblent à des chevaux • CEO de ma propre vie • Mon signe lunaire est en Mercure ascendant Saturne donc on est pas compatibles probablement 🔮 • J'ai fait 3 retraites ayahuasca cette année\n\n🚬 Ne fume pas (juste de la sauge) • 🍷 Boit du vin naturel biodynamique • 🌙 Chamanisme & astrologie védique • 🗳️ Vote blanc par principe cosmique", match:false },
-  { avatarIdx:2, name:"23 ans", bio:"Ici pour trouver le père de mes 6 enfants 👶👶👶👶👶👶 • Ex hôtesse de l'air reconvertie en coach de vie quantique ✨ • J'ai lu les 4 tomes de 50 nuances de Grey en 2 jours • Mon ex était toxique mais moi aussi un peu 🙃 • Je dors avec mes 4 chiens dans le lit\n\n🚬 Fume quand elle est stressée (souvent) • 🍸 Boit des rosés en semaine • 💫 Croit aux anges gardiens & aux signes • 🗳️ Vote pour celui qui a la plus belle cravate", match:false },
-  { avatarIdx:3, name:"26 ans", bio:"Blonde & ambitieuse 💛 • Muscu quotidienne 🏋️‍♀️ • Pokémon master 🎮 • Vinyles & bonne musique 🎵 • La foi guide ma vie 🙏\n\n🚬 Ne fume pas • 🥤 Ne boit pas • ✝️ Chrétienne • 🗳️ Droite", match:true },
+  { avatarIdx:0, name:"24 ans",
+    bio:"Militante à temps plein 🌈✊ • Vegane depuis le ventre de ma mère 🥦 • J'ai bloqué mon père sur insta pour mansplaining • Mon chat s'appelle Simone de Beauvoir 🐱 • Chercheuse en études de genre à Paris 8",
+    tags:["🚬 Fume (bio équitable)", "🍺 Kombucha militant", "🔮 Wicca", "🗳️ Extrême gauche"],
+    match:false },
+  { avatarIdx:1, name:"25 ans",
+    bio:"Amoureuse des chevaux 🐴 et des hommes qui ressemblent à des chevaux • CEO de ma propre vie • Mon signe lunaire est en Mercure ascendant Saturne donc on est pas compatibles probablement • J'ai fait 3 retraites ayahuasca cette année",
+    tags:["🚬 Ne fume pas (juste de la sauge)", "🍷 Vin biodynamique", "🌙 Chamanisme", "🗳️ Vote blanc cosmique"],
+    match:false },
+  { avatarIdx:2, name:"23 ans",
+    bio:"Ici pour trouver le père de mes 6 enfants 👶👶👶👶👶👶 • Coach de vie quantique ✨ • J'ai lu 50 nuances de Grey en 2 jours • Mon ex était toxique mais moi aussi un peu 🙃 • Je dors avec mes 4 chiens",
+    tags:["🚬 Fume (quand stressée, souvent)", "🍸 Rosé en semaine", "💫 Croit aux anges", "🗳️ La plus belle cravate"],
+    match:false },
+  { avatarIdx:3, name:"26 ans",
+    bio:"Powerlifter 🏋️‍♀️ • Pokémon master 🎮 • Les jeux vidéos de temps en temps 🕹️ • Je rêve de partir au Japon manger des ramen 🍜 • Vinyles & bonne musique 🎵",
+    tags:["🚬 Ne fume pas", "🥤 Ne boit pas", "✝️ Chrétienne", "🗳️ Droite"],
+    match:true },
 ];
 
 const PHRASES = [
@@ -509,7 +521,18 @@ function Game1({onSuccess, onFail}) {
               <div style={{fontWeight:"800",color:"#b03080",fontSize:"1.1rem",marginBottom:"8px",fontFamily:"'Nunito',sans-serif"}}>
                 {profile.name}
               </div>
-              <div style={{fontSize:"0.83rem",color:"#7c3aed",lineHeight:"1.6",whiteSpace:"pre-line",textAlign:"left"}}>
+              {/* Hinge-style tag pills */}
+              <div style={{display:"flex",flexWrap:"wrap",gap:"6px",marginBottom:"12px",justifyContent:"center"}}>
+                {profile.tags.map((tag,i) => (
+                  <span key={i} style={{
+                    background:"linear-gradient(135deg,#fce7f3,#f3e8ff)",
+                    border:"1.5px solid #f9a8d4", borderRadius:"50px",
+                    padding:"4px 10px", fontSize:"0.72rem", color:"#7c3aed",
+                    fontWeight:"700", whiteSpace:"nowrap",
+                  }}>{tag}</span>
+                ))}
+              </div>
+              <div style={{fontSize:"0.83rem",color:"#7c3aed",lineHeight:"1.6",textAlign:"left"}}>
                 {profile.bio}
               </div>
             </div>
