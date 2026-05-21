@@ -386,44 +386,165 @@ function NoScreen({onBack}) {
 
 // ─── GAME 1 ───────────────────────────────────────────
 function Game1({onSuccess, onFail}) {
-  const [result, setResult] = useState(null);
-  const handleSwipe = (p, right) => {
+  const [index, setIndex]       = useState(0);
+  const [swipeDir, setSwipeDir] = useState(null); // "left" | "right"
+  const [result, setResult]     = useState(null);
+  const cardRef = useRef(null);
+
+  // Touch/drag state
+  const dragStart = useRef(null);
+  const [dragX, setDragX]       = useState(0);
+  const [dragging, setDragging] = useState(false);
+
+  const profile = PROFILES[index];
+
+  const doSwipe = (right) => {
     if (result) return;
-    if (right && p.match)   { setResult("win");  setTimeout(onSuccess, 1400); }
-    else if (right && !p.match) { setResult("lose"); }
+    setSwipeDir(right ? "right" : "left");
+    setTimeout(() => {
+      setSwipeDir(null);
+      setDragX(0);
+      if (right && profile.match) {
+        setResult("win");
+        setTimeout(onSuccess, 1200);
+      } else if (right && !profile.match) {
+        setResult("lose");
+      } else {
+        // left swipe — go to next or loop
+        const next = (index + 1) % PROFILES.length;
+        setIndex(next);
+      }
+    }, 400);
   };
+
+  // Drag handlers
+  const onDragStart = (e) => {
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    dragStart.current = x;
+    setDragging(true);
+  };
+  const onDragMove = (e) => {
+    if (!dragging || dragStart.current === null) return;
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    setDragX(x - dragStart.current);
+  };
+  const onDragEnd = () => {
+    if (!dragging) return;
+    setDragging(false);
+    if (Math.abs(dragX) > 80) {
+      doSwipe(dragX > 0);
+    } else {
+      setDragX(0);
+    }
+    dragStart.current = null;
+  };
+
+  const rotation = dragX / 15;
+  const swipeStyle = swipeDir === "right"
+    ? {transform:"translateX(120%) rotate(20deg)", opacity:0}
+    : swipeDir === "left"
+    ? {transform:"translateX(-120%) rotate(-20deg)", opacity:0}
+    : {transform:`translateX(${dragX}px) rotate(${rotation}deg)`};
+
   return (
     <div style={PAGE}>
-      <div style={CARD}>
+      <div style={{...CARD, overflow:"hidden"}}>
         <div style={STEP}>Épreuve 1 / 4</div>
         <div style={TITLE}>🔍 Trouvez Lisa sur Hinge !</div>
-        <div style={SUB}>💚 swipez à droite sur le bon profil · ✕ pour passer</div>
-        {result==="win"  && <div style={{color:"#22c55e",fontWeight:"bold",fontSize:"1.1rem",marginBottom:"10px"}}>✅ C'est bien Lisa ! Bravo ! 💕</div>}
-        {result==="lose" && <div style={{marginBottom:"12px"}}>
-          <div style={{color:"#ef4444",fontWeight:"bold",marginBottom:"8px"}}>❌ Ce n'est pas Lisa… 😬</div>
-          <button style={btn("pink")} onClick={onFail}>Recommencer depuis le début</button>
-        </div>}
-        {!result && (
-          <div style={{display:"flex",flexDirection:"column",gap:"10px"}}>
-            {PROFILES.map((p,i) => (
-              <div key={i} style={{
-                background:"linear-gradient(135deg,#fff0f8,#f5e6ff)", borderRadius:"20px",
-                padding:"12px 14px", border:"1.5px solid #f9a8d4",
-                display:"flex", alignItems:"center", gap:"12px",
-              }}>
-                <img src={svgToDataUrl(GIRL_AVATARS[p.avatarIdx])} alt={p.name}
-                  style={{width:"60px",height:"60px",borderRadius:"50%",border:"2.5px solid #f9a8d4",flexShrink:0}}/>
-                <div style={{flex:1, textAlign:"left"}}>
-                  <div style={{fontWeight:"bold",color:"#b03080",fontSize:"0.92rem"}}>{p.name}</div>
-                  <div style={{fontSize:"0.78rem",color:"#7c3aed",lineHeight:"1.4"}}>{p.bio}</div>
-                </div>
-                <div style={{display:"flex",flexDirection:"column",gap:"6px"}}>
-                  <button style={{...btn("pink"),padding:"8px 13px",fontSize:"0.9rem",margin:0}} onClick={()=>handleSwipe(p,true)}>💚</button>
-                  <button style={{...btn("red"), padding:"8px 13px",fontSize:"0.9rem",margin:0}} onClick={()=>handleSwipe(p,false)}>✕</button>
-                </div>
-              </div>
-            ))}
+        <div style={SUB}>💚 Swipez à droite si c'est elle · ✕ sinon</div>
+
+        {result==="win" && (
+          <div style={{color:"#22c55e",fontWeight:"bold",fontSize:"1.1rem",margin:"20px 0"}}>
+            ✅ C'est bien Lisa ! Bravo ! 💕
           </div>
+        )}
+        {result==="lose" && (
+          <div style={{margin:"20px 0"}}>
+            <div style={{color:"#ef4444",fontWeight:"bold",marginBottom:"12px",fontSize:"1rem"}}>❌ Ce n'est pas Lisa… 😬</div>
+            <button style={btn("pink")} onClick={onFail}>Recommencer depuis le début</button>
+          </div>
+        )}
+
+        {!result && (
+          <>
+            {/* Card swipeable */}
+            <div
+              ref={cardRef}
+              onMouseDown={onDragStart}
+              onMouseMove={onDragMove}
+              onMouseUp={onDragEnd}
+              onMouseLeave={onDragEnd}
+              onTouchStart={onDragStart}
+              onTouchMove={onDragMove}
+              onTouchEnd={onDragEnd}
+              style={{
+                ...swipeStyle,
+                transition: dragging ? "none" : "transform 0.4s ease, opacity 0.4s ease",
+                cursor: "grab",
+                userSelect: "none",
+                touchAction: "none",
+                background: "linear-gradient(135deg,#fff0f8,#f5e6ff)",
+                borderRadius: "24px",
+                padding: "20px",
+                border: "2px solid #f9a8d4",
+                marginBottom: "16px",
+                position: "relative",
+              }}>
+              {/* Like / Nope indicators */}
+              {dragX > 40 && (
+                <div style={{position:"absolute",top:"16px",left:"16px",border:"3px solid #22c55e",
+                  color:"#22c55e",fontWeight:"900",fontSize:"1.4rem",padding:"4px 10px",
+                  borderRadius:"8px",transform:"rotate(-15deg)",opacity: Math.min(dragX/100,1)}}>
+                  LIKE 💚
+                </div>
+              )}
+              {dragX < -40 && (
+                <div style={{position:"absolute",top:"16px",right:"16px",border:"3px solid #ef4444",
+                  color:"#ef4444",fontWeight:"900",fontSize:"1.4rem",padding:"4px 10px",
+                  borderRadius:"8px",transform:"rotate(15deg)",opacity: Math.min(-dragX/100,1)}}>
+                  NOPE ✕
+                </div>
+              )}
+              <img
+                src={svgToDataUrl(GIRL_AVATARS[profile.avatarIdx])}
+                alt={profile.name}
+                draggable="false"
+                style={{width:"120px",height:"120px",borderRadius:"50%",
+                  border:"3px solid #f9a8d4",display:"block",margin:"0 auto 14px"}}
+              />
+              <div style={{fontWeight:"800",color:"#b03080",fontSize:"1.2rem",marginBottom:"6px",fontFamily:"'Pacifico',cursive"}}>
+                {profile.name}
+              </div>
+              <div style={{fontSize:"0.88rem",color:"#7c3aed",lineHeight:"1.5"}}>
+                {profile.bio}
+              </div>
+            </div>
+
+            {/* Buttons */}
+            <div style={{display:"flex",justifyContent:"center",gap:"24px"}}>
+              <button onClick={()=>doSwipe(false)} style={{
+                width:"58px",height:"58px",borderRadius:"50%",border:"2px solid #f9a8d4",
+                background:"white",fontSize:"1.5rem",cursor:"pointer",
+                boxShadow:"0 4px 12px rgba(244,114,182,0.2)",transition:"transform 0.15s"
+              }}>✕</button>
+              <button onClick={()=>doSwipe(true)} style={{
+                width:"58px",height:"58px",borderRadius:"50%",border:"none",
+                background:"linear-gradient(135deg,#f472b6,#c084fc)",fontSize:"1.5rem",cursor:"pointer",
+                boxShadow:"0 4px 12px rgba(244,114,182,0.4)",transition:"transform 0.15s"
+              }}>💚</button>
+            </div>
+
+            {/* Progress dots */}
+            <div style={{display:"flex",justifyContent:"center",gap:"6px",marginTop:"14px"}}>
+              {PROFILES.map((_,i) => (
+                <div key={i} style={{
+                  width:"8px",height:"8px",borderRadius:"50%",
+                  background: i===index ? "#c084fc" : "#f9a8d4",
+                  transition:"background 0.3s"
+                }}/>
+              ))}
+            </div>
+          </>
         )}
       </div>
     </div>
