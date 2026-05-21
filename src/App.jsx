@@ -465,7 +465,7 @@ function Game1({onSuccess, onFail}) {
   return (
     <div style={PAGE}>
       <div style={{...CARD, overflow:"hidden"}}>
-        <div style={STEP}>Épreuve 1 / 4</div>
+        <div style={STEP}>Épreuve 1 / 6</div>
         <div style={TITLE}>🔍 Trouvez Lisa sur Hinge !</div>
         <div style={SUB}>💚 Swipez à droite si c'est elle · ✕ sinon</div>
 
@@ -593,7 +593,7 @@ function Game2({onSuccess}) {
   return (
     <div style={PAGE}>
       <div style={CARD}>
-        <div style={STEP}>Épreuve 2 / 4</div>
+        <div style={STEP}>Épreuve 2 / 6</div>
         <div style={TITLE}>💬 Choisissez vos phrases d'accroche !</div>
         <div style={SUB}>Sélectionnez TOUTES les phrases qui pourraient séduire Lisa ✨</div>
         <div style={{display:"flex",flexDirection:"column",gap:"8px",marginBottom:"14px"}}>
@@ -765,7 +765,7 @@ function Game2b({ onSuccess }) {
   return (
     <div style={PAGE}>
       <div style={CARD}>
-        <div style={STEP}>Épreuve 2b / 5</div>
+        <div style={STEP}>Épreuve 3 / 6</div>
         <div style={TITLE}>🗓️ Organise le date parfait !</div>
         <div style={SUB}>
           Glisse les <strong>6 bonnes activités</strong> dans les emplacements 👇<br/>
@@ -1002,7 +1002,7 @@ function GameFlappy({ onSuccess }) {
   return (
     <div style={{...PAGE, padding:"8px"}}>
       <div style={{...CARD, padding:"16px 12px"}}>
-        <div style={STEP}>Épreuve 3 / 6</div>
+        <div style={STEP}>Épreuve 4 / 6</div>
         <div style={{...TITLE, marginBottom:"4px"}}>🐦 Flappy Lisa !</div>
         <div style={{...SUB, marginBottom:"10px", fontSize:"0.82rem"}}>
           Passe {FLAPPY_WIN} obstacles pour continuer 💪<br/>
@@ -1036,7 +1036,7 @@ function Game3({onSuccess}) {
   return (
     <div style={PAGE}>
       <div style={CARD}>
-        <div style={STEP}>Épreuve 3 / 5</div>
+        <div style={STEP}>Épreuve 5 / 6</div>
         <div style={TITLE}>🏋️ Devine le muscle préféré de Lisa !</div>
         <div style={SUB}>Quel groupe musculaire fait craquer Lisa ? 👀</div>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px"}}>
@@ -1157,7 +1157,7 @@ function Game4({onSuccess}) {
   return (
     <div style={PAGE}>
       <div style={CARD}>
-        <div style={STEP}>Épreuve 4 / 5</div>
+        <div style={STEP}>Épreuve 6 / 6</div>
         <div style={TITLE}>🔐 Ouvre le cœur de Lisa !</div>
         <div style={SUB}>Glisse la clé avec le bon Pokémon vers le cœur 💜<br/><span style={{fontSize:"0.8rem",color:"#c084fc"}}>👆 Fais glisser avec ton doigt !</span><br/><span style={{fontSize:"0.75rem",color:"#f9a8d4",fontStyle:"italic"}}>Indice : c'est le Pokémon préféré de Lisa depuis l'enfance ⚡</span></div>
 
@@ -1379,7 +1379,8 @@ export default function App() {
       {screen==="no"      && <NoScreen onBack={()=>go("welcome")}/>}
       {screen==="game1"   && <Game1 onSuccess={()=>go("game2")} onFail={()=>go("welcome")}/>}
       {screen==="game2"   && <Game2 onSuccess={()=>go("game2b")}/>}
-      {screen==="game2b"  && <Game2b onSuccess={()=>go("game3")}/>}
+      {screen==="game2b"  && <Game2b onSuccess={()=>go("flappy")}/>}
+      {screen==="flappy"  && <GameFlappy onSuccess={()=>go("game3")}/>}
       {screen==="game3"   && <Game3 onSuccess={()=>go("game4")}/>}
       {screen==="game4"   && <Game4 onSuccess={()=>go("final")}/>}
       {screen==="final"   && <FinalScreen/>}
