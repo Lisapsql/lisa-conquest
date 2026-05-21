@@ -1,6 +1,12 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
 
+// Google Fonts
+const fontLink = document.createElement("link");
+fontLink.rel = "stylesheet";
+fontLink.href = "https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800&family=Dancing+Script:wght@700&display=swap";
+document.head.appendChild(fontLink);
+
 // ══════════════════════════════════════════════════════
 //  RICK ASTLEY — Web Audio API synth
 //  Never Gonna Give You Up — mélodie principale
@@ -321,7 +327,7 @@ const PKM_IMGS = {
 const PAGE = {
   minHeight:"100vh",
   background:"linear-gradient(135deg,#fce4f3 0%,#f3e0ff 50%,#ffd6f0 100%)",
-  fontFamily:"'Georgia',serif",
+  fontFamily:"'Nunito', sans-serif",
   display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center",
   padding:"16px", boxSizing:"border-box",
 };
@@ -331,12 +337,12 @@ const CARD = {
   boxShadow:"0 8px 40px rgba(200,100,200,0.22)",
   border:"2px solid rgba(255,180,230,0.5)", textAlign:"center",
 };
-const TITLE = {fontSize:"1.5rem", fontWeight:"bold", color:"#b03080", marginBottom:"8px"};
+const TITLE = {fontSize:"1.5rem", fontWeight:"bold", color:"#b03080", marginBottom:"8px", fontFamily:"'Pacifico', cursive", lineHeight:"1.4"};
 const SUB   = {fontSize:"0.92rem", color:"#9060a0", marginBottom:"16px", lineHeight:"1.5"};
-const STEP  = {fontSize:"0.72rem", color:"#c084fc", marginBottom:"8px", letterSpacing:"0.1em", textTransform:"uppercase"};
+const STEP  = {fontSize:"0.85rem", color:"#c084fc", marginBottom:"8px", letterSpacing:"0.05em", fontFamily:"'Dancing Script', cursive", fontWeight:"700"};
 const btn = (v="pink") => ({
   padding:"12px 26px", borderRadius:"50px", border:"none", cursor:"pointer",
-  fontFamily:"inherit", fontSize:"1rem", fontWeight:"bold", margin:"6px",
+  fontFamily:"'Nunito', sans-serif", fontSize:"1rem", fontWeight:"bold", margin:"6px",
   background: v==="pink" ? "linear-gradient(135deg,#f472b6,#c084fc)"
             : v==="red"  ? "linear-gradient(135deg,#f43f5e,#fb923c)"
             : "#f1e6fa",
@@ -353,7 +359,7 @@ function WelcomeScreen({onYes, onNo}) {
     <div style={PAGE}>
       <div style={CARD}>
         <div style={{fontSize:"3.5rem",marginBottom:"10px",display:"inline-block",animation:"pulse 1.5s infinite"}}>💖</div>
-        <div style={TITLE}>Bienvenue sur la Conquête de la Belle Lisa P. ✨</div>
+        <div style={{...TITLE, fontSize:"1.6rem"}}>Bienvenue sur la Conquête de la Belle Lisa P. ✨</div>
         <div style={SUB}>Une quête épique vous attend, courageux prétendant(e).<br/>Êtes-vous prêt(e) à relever le défi ?</div>
         <div style={{display:"flex",justifyContent:"center",flexWrap:"wrap"}}>
           <button style={btn("pink")} onClick={onYes}>💪 Oui, je tente ma chance !</button>
@@ -482,7 +488,7 @@ function Game3({onSuccess}) {
             const picked=chosen===m;
             return (
               <button key={i} onClick={()=>pick(m)} style={{
-                padding:"16px 10px",borderRadius:"16px",cursor:"pointer",fontFamily:"inherit",
+                padding:"16px 10px",borderRadius:"16px",cursor:"pointer",fontFamily:"'Nunito', sans-serif",
                 border:`2px solid ${picked?(m.correct?"#22c55e":"#ef4444"):"#f9a8d4"}`,
                 background:picked?(m.correct?"#d1fae5":"#fee2e2"):"linear-gradient(135deg,#fff0f8,#f5e6ff)",
                 transition:"transform 0.15s",
@@ -690,7 +696,7 @@ function FinalScreen() {
       <Confetti active={confettiActive}/>
       <div style={{...CARD, zIndex:10, position:"relative"}}>
         <div style={{fontSize:"3.5rem",marginBottom:"8px",animation:"bounce 0.8s infinite"}}>🎉💕🎊</div>
-        <div style={{fontSize:"2rem",fontWeight:"bold",color:"#b03080",marginBottom:"10px"}}>
+        <div style={{fontSize:"2rem",fontWeight:"bold",color:"#b03080",marginBottom:"10px",fontFamily:"'Pacifico', cursive"}}>
           FÉLICITATIONS !!!
         </div>
         <div style={{fontSize:"1rem",color:"#7c3aed",marginBottom:"12px",fontWeight:"bold"}}>
