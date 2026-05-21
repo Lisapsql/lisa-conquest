@@ -265,17 +265,17 @@ const svgToDataUrl = (svg) => `data:image/svg+xml;base64,${btoa(unescape(encodeU
 //  DATA
 // ══════════════════════════════════════════════════════
 const PROFILES = [
-  { avatarIdx:0, name:"24 ans",
+  { avatarIdx:0, name:"26 ans",
     bio:"Militante à temps plein ✊\n\nVegane depuis le ventre de ma mère 🥦\n\nJ'ai bloqué mon père sur insta pour mansplaining\n\nMon chat s'appelle Simone de Beauvoir 🐱\n\nChercheuse en études de genre à Paris 8",
-    tags:["🚬 Fume", "🍺 Ne boit pas (kombucha only)", "🔮 Wicca", "🗳️ Extrême gauche"],
+    tags:["🚬 Fume", "🍺 Ne boit pas (kombucha only)", "🔮 Witch", "🗳️ Extrême gauche"],
     match:false },
   { avatarIdx:1, name:"25 ans",
     bio:"Amoureuse des chevaux 🐴\n\nCEO de ma propre vie\n\nMon signe lunaire est en Mercure ascendant Saturne donc on est sûrement pas compatibles\n\nJ'ai fait 3 retraites ayahuasca cette année 🌿",
     tags:["🚬 Ne fume pas", "🍷 Boit du vin biodynamique", "🌙 Chamanisme & astrologie", "🗳️ Vote blanc"],
     match:false },
-  { avatarIdx:2, name:"23 ans",
+  { avatarIdx:2, name:"25 ans",
     bio:"Ici pour trouver le père de mes 6 enfants 👶\n\nCoach de vie quantique reconvertie ✨\n\nMon ex était toxique mais moi aussi un peu 🙃\n\nJe dors avec mes 4 chiens dans le lit 🐶",
-    tags:["🚬 Fume", "🍸 Rosé en semaine", "💫 Croit aux anges gardiens", "🗳️ Vote la plus belle cravate"],
+    tags:["🚬 Fume", "🍸 Rosé, rarement", "💫 Croit aux anges gardiens", "🗳️ Vote la plus belle cravate"],
     match:false },
   { avatarIdx:3, name:"26 ans",
     bio:"Baby powerlifter 🏋️‍♀️\n\nPokémon master & jeux vidéos de temps en temps 🎮\n\nPassionnée de culture japonaise & ramen 🍜🇯🇵\n\nJ'aime la musique en tout genre 🎵 • Piano 🎹 • Lecture 📖\n\nJe suis très rancunière et têtue… car j'ai souvent raison 😤",
@@ -321,7 +321,7 @@ const KEYS_DATA = [
   {key:"brindibou",  name:"Brindibou",   color:"#d1fae5"},
   {key:"denticrisse",name:"Denticrisse", color:"#fde8ff"},
   {key:"mew",        name:"Mew",         color:"#f5d0fe"},
-  {key:"pichu",      name:"Pichu ⚡",    color:"#fffbcc", correct:true},
+  {key:"pichu",      name:"Pichu ",    color:"#fffbcc", correct:true},
 ];
 
 // ── POKÉMON IMAGES (base64) ─────────────────────────────────
