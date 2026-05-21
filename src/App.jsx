@@ -375,7 +375,7 @@ function WelcomeScreen({onYes, onNo}) {
     <div style={PAGE}>
       <div style={CARD}>
         <div style={{fontSize:"3.5rem",marginBottom:"10px",display:"inline-block",animation:"pulse 1.5s infinite"}}>💖</div>
-        <div style={{...TITLE, fontSize:"1.6rem"}}>Bienvenue sur la Conquête de la Belle Lisa P. ✨</div>
+        <div style={{...TITLE, fontSize:"1.6rem"}}>Bienvenue sur la Conquête de Lisouille ✨</div>
         <div style={SUB}>Une quête épique vous attend, courageux prétendant(e).<br/>Êtes-vous prêt(e) à relever le défi ?</div>
         <div style={{display:"flex",justifyContent:"center",flexWrap:"wrap"}}>
           <button style={btn("pink")} onClick={onYes}>💪 Oui, je tente ma chance !</button>
@@ -751,7 +751,7 @@ function Game2b({ onSuccess }) {
     setFeedback(null);
   };
 
-  const NUMS = ["1er","2ème","3ème","4ème","5ème","6ème"];
+  const NUMS = ["1","2","3","4","5","6"];
 
   const itemStyle = (isDragging) => ({
     padding:"10px 14px", borderRadius:"50px",
@@ -1101,6 +1101,8 @@ function KeyCard({ k, isDragging, wasTried, onPointerDown }) {
   );
 }
 
+const HEART_IMG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAYAAAA8AXHiAAAdF0lEQVR42u2deZhcVZn/P+8599bSVb13QlYCCUlICIjEsBj5ORoBdQAdXGYAn0ccwAGigyhxcBh43EUFdUQdccEFcR1BgnFFZ3BlFJQ1QEggbAGydaf3qnvPeX9/3OpOQELSW7qqct/n6efJ0+mqe+453/Pui6gqKaU03mTSLUgpBVZKKbBSSoGVUkopsFJKgZVSCqyUUkqBlVIKrJRSYKWUUgqslKqdgppdeSXGuTPWuWvMUxAAESr/qLbFJ8tVraxah9c9tOzhNYvU5PFITQShVVH1w/svxoxow9X7YSAiknx+X4LI6/AFEBEYyfNVk/UPrV2kJsBWlcBSFPWKOo9Yg3meg3BxRKlzO6Xuber7+ogHSzgXY6whzGSwxWay7VMk29KO+ZuDUDR2YAQROyEMzXsP3mNs8Dff71HKnV0Mbt+qrrcTNzhA7MEGliCbxRaLZJvbJWxuIwiC58IUnAc8iAFjkBRYe76dzjsUEBtgKxvZ37mVnnUP6I77/kr/Q3cz8OhGypueoty5Be3bgY9K2ChhSmrAWvDZPKaxlVzbNDKzZ9Mwfz6Ni5bSeMSLaJy7UEJJDsR7D+owJhg7J6hwFxWDMcl3Rero2fCA9t57F93330X/hvvof/IJ4s2b0R3d+PIAOI9q8nhrBc1k0WIjQdtUcgdMozD7YPKHvojmw4+iaf5CybW0D4PJuRiDjJiL7x/AUgXvwO68nV0PP6Sbf/sLOv/3F/Td9ScGNz+N9CeX31gwAUgAYiXRqCr6lA5xPFVsWXEONE5+4gCC5gZyCxfTseJkpp10Mq1LjhIZOibnwBh0529GACiHVNbvge333KFb1tzM9lt/Qvf6e6BrEByEAhIOrZ3h5z2LJXlFnIcIogT3OAHTAHb6DJqOfCkdrziJ9r87kebpBw5/Wl2ccDAx+zewFMW7GGNDAMoDvTz9y5t10w+/Tc8fbyXa1kNoIMiCyQhqAlQU2UVlQj2C8rdvIcnJie7U4Ss33A2CLwHNlsIxL+fAN53N9JNOkUyxMTnXOMbYipjc0zvEMRoEGKDUt4OnfrpaN33/a/T86bdod4zNJusnSESiKohqZf0KqshzTA8qF0UqdruKYFTAKT6KiQdBPcjMVpqWn8Sc095CxytOkDDMJHsax9ggmFSjZdKAlSikghihv6eTx7/zTd10/Zco37sWI2CKEAQhnoryqvzN9o/ylRGTKNAax7heJVLILVjAtLedz9wz3ya5hmacdxiR3d9+TUCBMfT37eDJb31NH73+c5TWbiArYIsVMA0p7uO1z7sYH1KOGRhIwFc44kimn3EWs974Vsk3tgzv8b41VCYLWAqKQ51iggDnHA9/9yv66BeupHz/esI8hLkQ0ET3YWLXpiJYDAjEAzHRAOQOX8zBF1/GnFP/SQRQFyEVjjr8Dt4hNuFmj93wXV3/mfcT3fMgQR5sg0VVKhdnove2osup4AYiXAnsoXM58O0XcdBb/kXCIERdjBi7z/WvfQYsregwisVYePqOP+q6D76Xvt/9jkwOJJ9BvEvcCpPiKk4OKeqPcSVoOu3NHPH+T1CcMUd2gktxcYQNMvQ++bjee/nFdN70fTIZMIUA9Qp+Etcvgh+IGRyAhmOP5dD/uIJpL325xHis94gJ6gtYCahixAaU44gHP/0hfeLqK8gOREhzgFOPdYpWg1EjFiNCqSuCObNZ/PEvMPuEk0VdYq0aa3nsltX64HtW4p94glxLiMNPHqCeB2BiDHFPhLOWWeevYsElH5BMkEm4lw3qBVgeFztsENL1xCN6z4Xn0vvrX5FvEdRaiB1aseaqxlhWQUKL9kUMqOXgy65g0QUXiwBrP3+lPvLhVTQYkHyI8zFSZa5AAdRaxDvK25XcK1/OkZ/9Ms2z5ouLYmwY1D6wnIuwNuTp/7tV/3rBW8lsfBTTFqLOjZ9COyEbA2oFJ0q0VZm1ahVOlGeuuJJsu+BNcnDVTCqCtSHlzhI6ZzZHfPHbTF/2MvHOYaytPWBpxZnjfYQNQh772Q/13vPfShD1EeRDiGNqgQQFtWCg1O8QhVxDQCwO46kO0b0XZyGBxffFxLkmlnzpOma96lTxcYwEFpkgOTFhHGuI5W788Q/0vvPOJGcjTGB3xr1qjIbM9tpdf4AvR5Qlz6KvXsdBJ7xBEhXF1gawlMQDbGzA479arfe89c3kbRmxFqeO2ozV1z6JgrcWIkckOZZ8+0ZmLj9JdILE4rgCa8hrbYOALffcoXec9irCUhdkbBKiSGlSRaJRwAS4KEILHSy94Ve0Lj5CvPNYO76O1PH9Nu8wxtLd+TR3nX8mpq8LG6agqhpLUUB9jM0GSNdW7jrvTAa7NifZH+Ms4scVWF49KnD/qvPVr32QTCHA+bTpSHVZiqCxwzaGlO67lzsvWanOCN57FF99wFLnsDZkw7e+qJ0//BGZtgAfu8SySqmqOBeSBM+zbZZtP/hvNn7zGjVBgI913E5rXHQs9Q4RS89j6/W2E4/GDnSjoSIpt6pylFlwnjjXyjE//Q1NBy8WdHwC1+PCsbwqTmDtx96L39aJyZgUVDUhFx1kDGzdxn0fuRREGS+eNWZgeR9jbcDTt67RrhtuJNdkcS5OD61WKHZkWgI6b76JJ37+IzXGJlGRyQWWIhiiOGLDVR8iyeCQ1FdVY+SBjFHWf+bDxFEpQcUYs0zGBCx1iTx+6merdcdt/0dYzOCrPH6W0vOoWs4RFEP6b/8Lj/3kRhWxxG6ygKWgRvDO8dhXP0VOkuqTlGqQY4mCFwILj3/5KmJXwpqhUpZ9DCzvY4wYnv79/2jPbX8gLBrwqW5Vmy4IQTUiU7D03347T//+FhUj6Bi41ug5liQeqk3XX4Mtg0parV/7CDOEZXj6umsTXjWGdObRoUF9Erp57GHtvPWn2MaxoTulKiHnMI1C160/p+vxhxRjkjrJfQUsrfionlnz37hn+jDh2ORxStViHSomDChv6eOZNTclBb3qR2XljxhYSpKb5F3MMz+7kTAEUmdonehaibM7G8LWn/4I5+JRe+FH/ikfoSJsX3+vDtz9V2yD1GzyW0rPa5VhCkL/3X9m+7p7VcSMKvNh5Byr4qba9ttboauEBmEqBOuKFLEBrqdM5+9vTdJt9gWwqNSmdf7hFrCJZE497fUGLcUIdP3hfyrGoplgYKlirBD1dNKz9q/YHKkYrEdgeU+YgZ777mCgtzPp5zXCLBgzMlwlX75j/f3qn3wKk5GqLuFKabTIUiQjRJuepOehB3TXs58wjgXQufYufJ9PegKkVJ8WorH4fmXHA3c/6+wnBFgCOKD/vruSAHi6//XLtEQwCn333z2seU0cxxKDAfoe3oAE6ebXuwJvLQw8tHGYg00MsFTBCFGpj9KmjYlxWOeOUalcJrEWsUHyY2zS+7PeySsSwuATDxOVBpK44QjEYTASDINQ3rpV3dbNBAFoHQrD4fo7a5MWkCVHXN7pI7QGTAZM1iaBd+/qVClQbADxtk2Ut23WcMYcGW6UOp7AUk1aLpa2PkPc00sYCHU5T9okjUC0KyYOwM6bQ+O8xTR0TEVQerc+Q/9Da+l/5HFC58g0hnhc/VnHqogVor5eBjc/Q2HGHBTda59lMKKrDAxu3Qwlj2Zs9fSEGgcuJSpgBSKHG4SGk09l7lvPpXXZ8ZIrNg/rDB6IurvY9uc/6oZvfZ7eNWvI5kDCIMkVl/q6ZNLvKW3ZPCQdseMOrAqyou3bkDhphF8vd1Q0kXHxYIw2d7Dg6v/kwNedsbO1rffD3NmIkG1qYcaK18i0Fa9h44++oxsueRemezMmb+vKYawimBiizq2VfXLsLbRGbNtFvTuSelmto6tpBVeOsW0zWPK91RyweKnEcYwXSYYXPLdJvyrORwgw9/WnS+O8Q/SuM16P79yEZE3dGDWC4D2Uuzt3NWcmwN0A+J6eyjOkDjZueKQNMXkWf+mbHLB4qfgowgZB0oXl+d5TBGsyiA2JoxJTDl8mh33x65RMDuMErZPZV4ogAq63Z+KBFZdKz9OXvEYtaiAwhnKXZ9q55zP9uBXiohImDPe8hZLcaBtmcOWI6ctPkOnnrGSg2yG2vsLy8Sga5ZnRXPN62TYRg48cMqOd+W+/CKd+eJjBSMQFQRKkPeTt78LOaEXLri44+rN00F0tuIkBliT9OevC6BHK/dB2/AqK02aJ0dGliFiT+Lwap82StuNPwPfppDXunyiVYcJFYVDI4+qEa6kkiYttxx1fmTQxeosuGXuntB7z/3BV1QJ6HGybhszEi0Kbb6qfTdMkbFGcObciumRs91qEhjlzIUPNW4ZCMvPHAbbQyEgdAWZkj4JMa0fFnKp9YaiAD0DyuRGz+ufVtQCby1A/qR8KBsKmthHvzog5VqatLRmJprVfUG8AiSDq6R6xcvq3R5B8ttzdi0R1ortrMukv2zZlAoFV2al8RxsmZ8G7ZIxsLbsbrCAx9Gx4cMzAGpqU2LthbTIf0UitYyoZXZcz5NunjhguZoS4wrQfgGlsxbs64PYOTAg7fnPLsPthtIeAGBSh+ze/xob1oCkI3jtMsZlgygFUXnHidKxsyxTJdUzHO2qeY6l6ggbDttt+x9b7/qxqDH4UTcd8HCHGsGXtnbrttt+RaTCVuc21jCuBGGzHFDJt7TJx7oZKy+YwzJCZfTA+qgNgoWCFTM8gD33qQ8lrjjCIrKqICh5Y/6nLsb2DuKD2Ww6ICD6C3IHzCDO5xJ0iE+TH0kodf9P8hRCPzYqqCuVdk2HjttXSufpm1n39MyphiIvLeHV7lH+qDu8iTBiw7muf187VNxO0BOPSarEqgBVD0yELKmx5ZBduVEpF4dBFOAv1YFMLgFfyBcP6y1ax/ntfVRtkknnQL6AoKTEiFhtkWPf9a3XjZRdRaEhy1OojoUjxBhoXLRmVK2bExRQAjYcdiSmG4GLqwVuqqqgRCsax7sJzuPPyC7V/6+bdz3LWZCpY77Zn+Ovl79ZH3nk2eRvjjNZHJqmAxh4phjQtWjbMwSYMWCKJLlE4aKHkZs7Bl6mf9Bn1OCvkiwFPXvlZ7r70AhVjnj/9ulJYcuf7VuqTV36aXKMltoKpl+ISEXzZk5s9g4a582Q0TdjMSB+I92QaGsgf/iJciWQiPHVxSRFN3Jxh0WJxu/VtDeV+51QJCxYvJvms1AuuDK4MhSVHk20oJlmxEwosdvZqaD/2FYkDDamrZFJB0NiRaW3dHa6Gfxe2tlYmxVJ35BVal79yVJbyqIBlKukgbcf9Hb41h0T11dBWK1mMptjG7pFV2YvmdsYauq5O/5WDliztx75s6NAnHlgiSVJb04JDpWnJiykPajKTpV72NelMTaap5YV9DUBYbKk7ZiViiAeVxsOOpDBvkaj3+6CN0ZDF4D1WLO0nnEgUgTH1dGeTPIVMc9Me/zLbVKA+nC67iEADrgTtJ5xCxthR56iZ0aE6AdKUE99A0JxFo7hu5IEkiiNhsWWPfxs0tlbeu16qcoDYIS05pr76dc9yMe0TYCVtmpXWQ5ZI8ejlRAOaOBTrQcdCUQthY8uu2/18R4Btak7K7OqlCtpYfK9SPPZlNM9bLDqGEXNjmEzhMUY44A1nojG7ZtzXvI4lAUhj455whWkqVuo368V/BWVgxuvPwBozKmtwzMAy1uAVpp94sgRzp6ADrva7sEiiUlhrMMXibjnWULZo0NCIyQz1va/xuCkGPxiTPWgmU056XTIgdQyN9UaNBBFBvKOhZSpTTjmD8kA9KPGCx0M2Q7ahcbcMa+i3QaERyWQSUVjLr66JGIwGYMrJp1NoaUNdPAkjT3b1eQCzTz8X35arjD2pbXCJV3yugDQU9igKbb4BMg1Q86lXgncxvqXA7NPPRhh7+dqYPi2VWSut8xdL+4q/p9TtEVu74jCZzAAmnyVTyL9gcpsCQaEgNl+sAKt2L5RaS9Tj6XjVa2lbcKio1zH3lx0HFCiCcPA570Hztd7aSMCDaShisw17/GubKyANjYmrp6ZFocPnMsw5953jqLON9ShMMgO6Y9lx0nbS64i6fVLaUbMsC4KGZkyYewGGlTSdC8IstqFY094GMQFRt6f5pJPoeMnx4l0VTbEXSdr8zF15CS4XIk6pzcnQkgx2LxSSmOjuWJEkaTbGCEGxMByMr0XXivGeOBswd+Uq7Dgy3nEBlhGDOk/HUcuk/c3/SKk7rk1dq+JuCIoVMfhCrKjyX7aYr11RGBhKOxztp/0TU5ceL85F43ZuZrwOxEgSDll44WVIRxM+8rWZBKhgmpr2iCup/GfQ2DTWge+TZQqiseLbCiy88FKMKmYc/ZDj+E0G9RHNcxbI7HesotxToxaiB1ts3Ruhmbx2Y8tQYWFNvaaxhlK3Z9Z5F9E6b3wswYkBFoDJoN4x/5x3SXHpYfjuOOlfXUu3GMg0tj5b3r2ALMw212DqjDHEfTG5ww7lkPPeU0mNGedHjO+5JLc2zBeZ9+GrKQcW8dSOSKxEZkxL815/xDY11RSmhoJPPhbmf+DT5IotlZpBU73AGnI/qI+ZfswrZPq/vJPSdoepGa5VyXkfCkDrnnwTEO5FpmlV6Y+BpbTd0Xb2PzPzla8W52LEjn9mysScuFic9yy8+IMSHn0EfkdcEx3upNK2J2hpHRaNu1fFKvHClma8rSjzWt2oEmPxPTHB4QtZ/O9XCN5VUs2lNoA1FKDONzTyok9+gf5Cnthr9ZfkJ+WChMW9F29BoS1JAhjBOJDJuTQG8JSCLIs++V80NHbg8cM+yNrgWACBxbsyHS9aLodc/mGiLg/GJv1Lq3T/VRUJIGjI453DuxjdzY94hzpHpqEBa6gUhFUxsAJLabvnwEs/wMxjXiHeRVgTTtjzzMR9scHYDC6OOfRt75bWM/6R8vYIQovx1XmnUY/JBOSmzcFYi81kd079es6PyWQRa8nOnEmUC3G4qi2tl8BS3h7R/IY3sui8i0WdG3F36BE/c6IHLSV1iMpATxe3n7pCowfuQhoDqMbGGao4m6H1xFMIm1qSNcpuNw4xAXFPJ9t+fjNojEWqbiKaMRbXF+MXHMryG38j+baORN+a4KRM2RcTvNQ7xFi2PHCH3nnqqwgGutGMVGkmhBL3Am4vRLYCFjLFKuVVxuBjJcoWOfrGX9N+2FIZOosJ55L7ajScdzHGBjz6sxt07VlvJN9gk2zNKkwNSMxv2cXrswcXRTVyXxEEob9fOfza73Lga98k6tyEuBb2rfL+3AdZi4tj5rz6NJn3wU/S3xVjqrSyR52rKOlut8r7zp/qA1UyAydgoMsx7/1XMPu1bxIfR/sMVPsUWCDYIGlKtuDt75Hp//ouBrZF2CAkpfGl0FgGt5eZ+c6LmH/eKvFllwyc2pcMc59PSVXFq0PF8JeVZ+q273yXXEcGjaK6ai4ySawKyQQMbInoOOMtLP3cN0R8Eq4xYvapN0QmY/yuqkcUorjEbW97vQ6u+QV2agaiKAXHqA8SfNZS3hLT/JrXsOzaH0gY5lFhwi3AqgHWkBtCjGGgt4s/nX6KDv7xd2RbQ1wckzKu0XGqeFtE7viXcfS31kim0ITXGGsmJ0180gJ4YgzeO/LFFpZ94wbJvuQllLsiTBDU5Uz4CcQUgc0Qb4/ILXsJR339BskUm0BjjJm82oNJjQwbY/HOk2+bwrKvr8YecSSuM5lumtLeKuoZBrtL2KVH8eLrVlNomYK6CDHBpHL+SU85MFbAOQrTpssx31qNHnkEpZRz7ZFLoYIJAvq7S4RHHcWy626mOGV6JW998i3tKshlEcRavHMUp8+W5devJvvio4m2RwQp59qtom7CgMHOiNzSozn6uptonDpD1MdYG1aFjlo1SVKJWIzIHTBHjv32zWKXH8fg9oRzpfScvQoDStvK5F/6UpZ9+2bJT50lPnKIqZ69qqrsO7EB4mJyHVN56XU/lsKKV9KXgus5qoOltDUif+IKjrn+x1Jomwo+RsLqimJUD7AqU+HFBqjz5JrbOPobN8nUU19H/5YIE1j2dz+EsQF922NaTzuN4752k2QbW3HeYSZZUa96jrWTcyXNRoJ8gRd/5Qcy7ex/pn9rjEiQZKeq1kuft728cwaMpX9bxPS3vZ0jv/w9CfIFvI+qNt5atYnoYpKm/IEJOOqqr8rs9/47pa4I8ZrUMO4vyDJJSnG5K2bWJf/BEVddI6EmTWetCas2G3rSPO97b1tr4qW3lgevvVrX/ce7abAxNmNR5+s3vqhJ5qeWYga8YeFHPschZ50vGicV5mKr+8WrH1gA6vFeMdby6M9u0vv/9Swy3V3QGEDkknhYvTGqICDqjXBNbRx29VeYfeI/iMYOgqSqptrftzaAVSEfx5ggYMs9f9I7znsLsu4hwpYAqYCrfkBlKXXGBAsWcOQ136X98BeLi2OsDWrmBtUUsBJwRZggpHfz4/qXlWfRf8uvybUHOJ9ko9YivrTyEyCoNZS2xTS+agVHfP4bNE6dKT5Osm9r6eVM7d3mEHWO4tTZcuz1a+SAc86ltC0mjBW1tdlrXjSZUaTqGeyM6Tj/fI65/sfSOHVmUlETBDUn62uOYw1zLu9RBGOE+7/xWd142SoaojIUQpyLaqIR2lBWvQYW0xszaLPM/fCVLDzrHaJeQXRScqn2a2AlBqMHn/i9Nv3xl3rPhWdjHn6csCWD8/FwD6uqvRwihMZQ6oph7kEc9umvMHP5ClHnwVCzoKp5YA2Ri2NsENDzzKN610Ur6f3JGrJtBhWp3ma7xmA9DHQ6Cn//Wo688gsUps8RqZLshBRYQ+KkUl7m1HPfJy7VJz5zBXkD2hDgY4ehOqZHJL36Q/xgmUEHsy76Nxat+phkRJI8KlsfxSV1AazhQ/MeL2DF8MTPV+t9l7wD89jjZFpCYnWTLxolSRGKtkdw0GwO/cTnOHDFqeKdw4iMauBkCqx9RjE+VkwQ0v3kY3r3v11Az0/WkGsSNLCTU9qvVILrEaVuaDn5VJZ8/Goapx8oPi4j1iBSXxkcdQisROQNVf164IHPf1Q3fuIDZAfKSHOSPbHPuJdaJISoN4Z8gYNXvZ9Dzr9YpCK+xdZnSlAdAuvZolFxGBOy+Y4/6N3vu5D4z7eTazGolcrsn4nUzy2RKnGXo3Dsy1j0ic8wZclS8T5p2yZ1JPr2K2BVfBI4F2ODkNJAL/dfdZlu+q/PkY1jTFOId/H4p+CIICbAd5cp50KmXXAxSy66XMJsDo0rXKrOc8vqH1hD+HIxWIsgPPWH/9V1l7+Xgdv/TLbFQDB+3EushTim1A3hccdx+GWfZOqxyyXxd/q65lL7J7BQUI+6SpC31Me6z35cN15zFdkd/WSaA9Qrqm7Ebgkvyehii1DqiaGpkZnvuISFF1wsYSaTcEVjq79VZgqssepeO3tEbbvndn3wo++j85e3kM+AzWdxGu19eyUxGBMQDZSII2g78RQOufQjtC86XJ77rP2J9ktgDele3kcYm8GjbPzB1/SRT32UwQc3kG8ECUNw7gU69AkSGHw5JuqB4LBFzH/3ZRz4D6dXLD6XiD3ZPxP1919g7ap7iSDGMtC1lQ3XfFo3XftFdMt2wmbQIICKe0IREMEai3MR0Q7FTGtn5jkXMPec90i+qbliiVJpc73/0n4PrGGAxTEESbXLjocf1vVf+BhbfngdZkeJTAE0NEm77shTGgDTnKP9jW9h3spLaJ0zT6hzv1QKrDGo96jDOYZ7R2y590599Kv/SecvbsJ1daIGwqnTaD3x9Rx41kqmLFwikGS2Ys24Ts9KgVWXyr0H9UkYBtj+1EaNNj6CzTSQnztPiq0dFTFa++ktKbD2Pf/CewdeMcHOgtAYwDmsyH7jk0qBNSEAU8QryT5JRdFPW8OlwEppUijl5SmlwEopBVZKKbBSSikFVkopsFJKgZVSSimwUkqBlVIKrJRSSoGVUtXT/wdsLt0kn5vTjAAAAABJRU5ErkJggg==";
+
 // ─── GAME 4 : DRAG & DROP CLÉ POKÉMON ────────────────
 function Game4({onSuccess}) {
   const [dragging, setDragging]     = useState(null);
@@ -1160,12 +1162,30 @@ function Game4({onSuccess}) {
         <div style={SUB}>Glisse la clé avec le bon Pokémon vers le cœur 💜<br/><span style={{fontSize:"0.8rem",color:"#c084fc"}}>👆 Fais glisser avec ton doigt !</span><br/><span style={{fontSize:"0.75rem",color:"#f9a8d4",fontStyle:"italic"}}>Indice : c'est le Pokémon préféré de Lisa depuis l'enfance ⚡</span></div>
 
         <div ref={heartRef} style={{
-          fontSize: heartBurst ? "5rem" : "3.8rem",
-          marginBottom:"14px", transition:"all 0.3s",
-          animation: heartBurst ? "heartpop 0.5s ease" : "none",
+          width:"90px", height:"90px", marginBottom:"14px",
+          position:"relative", display:"inline-block",
+          transition:"all 0.3s",
           filter: heartBurst ? "drop-shadow(0 0 18px #f472b6)" : tried&&!tried.correct ? "drop-shadow(0 0 8px #ef4444)" : "none",
+          animation: heartBurst ? "heartpop 0.5s ease" : "none",
         }}>
-          {heartBurst ? "💖" : tried&&!tried.correct ? "💔" : "🔒"}
+          <img src={HEART_IMG} alt="coeur"
+            style={{width:"90px", height:"90px", objectFit:"contain",
+              filter: heartBurst ? "hue-rotate(300deg) saturate(1.5)" : tried&&!tried.correct ? "grayscale(0.3)" : "none",
+              transition:"filter 0.3s"
+            }}/>
+          {/* Lock overlay */}
+          {!heartBurst && (
+            <div style={{
+              position:"absolute", top:"50%", left:"50%",
+              transform:"translate(-50%,-40%)",
+              fontSize: tried&&!tried.correct ? "1.4rem" : "1.6rem",
+            }}>
+              {tried&&!tried.correct ? "" : ""}
+            </div>
+          )}
+          {heartBurst && (
+            <div style={{position:"absolute",top:"-10px",right:"-10px",fontSize:"1.8rem",animation:"heartpop 0.5s ease"}}>💕</div>
+          )}
         </div>
 
         {tried && !tried.correct && !heartBurst &&
@@ -1325,18 +1345,21 @@ function FinalScreen() {
         )}
 
         <div style={{marginBottom:"12px"}}>
-          {!musicStarted ? (
+          {!musicStarted && (
             <button style={btn("pink")} onClick={startMusic}>▶️ Lancer la musique !</button>
-          ) : (
-            <button style={{...btn("gray"), fontSize:"0.8rem", padding:"7px 16px"}}
-              onClick={()=>{ if(audioRef.current){ audioRef.current.pause(); audioRef.current.currentTime=0; setMusicStarted(false); }}}>
-              ⏹ Stop la musique
-            </button>
           )}
         </div>
         <button style={{...btn("pink"), fontSize:"0.9rem", padding:"10px 20px"}} onClick={relaunchConfetti}>
           🎊 Encore des confettis !
         </button>
+        {musicStarted && (
+          <div style={{marginTop:"10px"}}>
+            <button style={{...btn("gray"), fontSize:"0.8rem", padding:"7px 16px"}}
+              onClick={()=>{ if(audioRef.current){ audioRef.current.pause(); audioRef.current.currentTime=0; setMusicStarted(false); }}}>
+              ⏹ Stop la musique
+            </button>
+          </div>
+        )}
       </div>
       <style>{`@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}`}</style>
     </div>
