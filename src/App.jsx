@@ -261,10 +261,10 @@ const svgToDataUrl = (svg) => `data:image/svg+xml;base64,${btoa(unescape(encodeU
 //  DATA
 // ══════════════════════════════════════════════════════
 const PROFILES = [
-  { avatarIdx:0, name:"Chloé, 24 ans",  bio:"Café addict ☕ • Yoga queen 🧘 • Mon ex dit que j'ai une personnalité", match:false },
-  { avatarIdx:1, name:"Sophie, 26 ans", bio:"Influenceuse en devenir 📸 • Pas de drama svp • Répondez si vous êtes sérieux 🙄", match:false },
-  { avatarIdx:2, name:"Emma, 23 ans",   bio:"Je voyage beaucoup ✈️ (dans ma tête) • Fan de sushi & Netflix 🍣", match:false },
-  { avatarIdx:3, name:"Lisa, 23 ans",   bio:"Blonde 💛 • Accro à la muscu 🏋️‍♀️ • Pokémon master 🎮 • Vinyles & bonne musique 🎵", match:true },
+  { avatarIdx:0, name:"24 ans", bio:"Militante à temps plein 🌈✊ • Vegane depuis le ventre de ma mère 🥦 • J'ai bloqué mon père sur insta pour mansplaining • Mon chat s'appelle Simone de Beauvoir 🐱 • Chercheuse en études de genre à Paris 8\n\n🚬 Clope bio équitable only • 🍺 Boit du kombucha militant • 🔮 Wicca & féminisme spirituel • 🗳️ Extrême gauche (NPA c'est trop modéré)", match:false },
+  { avatarIdx:1, name:"25 ans", bio:"Amoureuse des chevaux 🐴 et des hommes qui ressemblent à des chevaux • CEO de ma propre vie • Mon signe lunaire est en Mercure ascendant Saturne donc on est pas compatibles probablement 🔮 • J'ai fait 3 retraites ayahuasca cette année\n\n🚬 Ne fume pas (juste de la sauge) • 🍷 Boit du vin naturel biodynamique • 🌙 Chamanisme & astrologie védique • 🗳️ Vote blanc par principe cosmique", match:false },
+  { avatarIdx:2, name:"23 ans", bio:"Ici pour trouver le père de mes 6 enfants 👶👶👶👶👶👶 • Ex hôtesse de l'air reconvertie en coach de vie quantique ✨ • J'ai lu les 4 tomes de 50 nuances de Grey en 2 jours • Mon ex était toxique mais moi aussi un peu 🙃 • Je dors avec mes 4 chiens dans le lit\n\n🚬 Fume quand elle est stressée (souvent) • 🍸 Boit des rosés en semaine • 💫 Croit aux anges gardiens & aux signes • 🗳️ Vote pour celui qui a la plus belle cravate", match:false },
+  { avatarIdx:3, name:"26 ans", bio:"Blonde & ambitieuse 💛 • Muscu quotidienne 🏋️‍♀️ • Pokémon master 🎮 • Vinyles & bonne musique 🎵 • La foi guide ma vie 🙏\n\n🚬 Ne fume pas • 🥤 Ne boit pas • ✝️ Chrétienne • 🗳️ Droite", match:true },
 ];
 
 const PHRASES = [
@@ -506,10 +506,10 @@ function Game1({onSuccess, onFail}) {
                 </div>
               )}
 
-              <div style={{fontWeight:"800",color:"#b03080",fontSize:"1.2rem",marginBottom:"6px",fontFamily:"'Pacifico',cursive"}}>
+              <div style={{fontWeight:"800",color:"#b03080",fontSize:"1.1rem",marginBottom:"8px",fontFamily:"'Nunito',sans-serif"}}>
                 {profile.name}
               </div>
-              <div style={{fontSize:"0.88rem",color:"#7c3aed",lineHeight:"1.5"}}>
+              <div style={{fontSize:"0.83rem",color:"#7c3aed",lineHeight:"1.6",whiteSpace:"pre-line",textAlign:"left"}}>
                 {profile.bio}
               </div>
             </div>
