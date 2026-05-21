@@ -375,7 +375,7 @@ function WelcomeScreen({onYes, onNo}) {
     <div style={PAGE}>
       <div style={CARD}>
         <div style={{fontSize:"3.5rem",marginBottom:"10px",display:"inline-block",animation:"pulse 1.5s infinite"}}>💖</div>
-        <div style={{...TITLE, fontSize:"1.6rem"}}>Bienvenue sur la Conquête de la Belle Lisa P. ✨</div>
+        <div style={{...TITLE, fontSize:"1.6rem"}}>Bienvenue sur la conquête de Lisouille ✨</div>
         <div style={SUB}>Une quête épique vous attend, courageux prétendant(e).<br/>Êtes-vous prêt(e) à relever le défi ?</div>
         <div style={{display:"flex",justifyContent:"center",flexWrap:"wrap"}}>
           <button style={btn("pink")} onClick={onYes}>💪 Oui, je tente ma chance !</button>
