@@ -4,7 +4,7 @@ import { createPortal } from "react-dom";
 // Google Fonts
 const fontLink = document.createElement("link");
 fontLink.rel = "stylesheet";
-fontLink.href = "https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;800&family=Dancing+Script:wght@700&display=swap";
+fontLink.href = "https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&family=Dancing+Script:wght@700&display=swap";
 document.head.appendChild(fontLink);
 
 // ══════════════════════════════════════════════════════
@@ -278,7 +278,7 @@ const PROFILES = [
     tags:["🚬 Fume", "🍸 Rosé en semaine", "💫 Croit aux anges gardiens", "🗳️ Vote la plus belle cravate"],
     match:false },
   { avatarIdx:3, name:"26 ans",
-    bio:"Powerlifter 🏋️‍♀️\n\nPokémon master & jeux vidéos de temps en temps 🎮\n\nJe rêve de partir au Japon manger des ramen 🍜\n\nVinyles & bonne musique 🎵",
+    bio:"Powerlifter 🏋️‍♀️\n\nPokémon master & jeux vidéos de temps en temps 🎮\n\nJe rêve de partir au Japon manger des ramen 🍜\n\nGrande amoureuse de musique 🎵🎹",
     tags:["🚬 Ne fume pas", "🥤 Ne boit pas", "✝️ Chrétienne"],
     match:true },
 ];
@@ -353,7 +353,7 @@ const CARD = {
   boxShadow:"0 8px 40px rgba(200,100,200,0.22)",
   border:"2px solid rgba(255,180,230,0.5)", textAlign:"center",
 };
-const TITLE = {fontSize:"1.5rem", fontWeight:"bold", color:"#b03080", marginBottom:"8px", fontFamily:"'Pacifico', cursive", lineHeight:"1.4"};
+const TITLE = {fontSize:"1.5rem", fontWeight:"bold", color:"#b03080", marginBottom:"8px", fontFamily:"'Fredoka One', cursive", lineHeight:"1.4"};
 const SUB   = {fontSize:"0.92rem", color:"#9060a0", marginBottom:"16px", lineHeight:"1.5"};
 const STEP  = {fontSize:"0.85rem", color:"#c084fc", marginBottom:"8px", letterSpacing:"0.05em", fontFamily:"'Dancing Script', cursive", fontWeight:"700"};
 const btn = (v="pink") => ({
@@ -622,6 +622,129 @@ function Game2({onSuccess}) {
   );
 }
 
+
+// ─── GAME 2b : DATE PARFAIT ───────────────────────────────
+const DATE_ACTIVITIES = [
+  { id:"dejeuner",label:"Déjeuner 🍣",                  correct:1 },
+  { id:"marche",  label:"Marche digestive 🚶‍♀️",        correct:2 },
+  { id:"sport",   label:"Salle de sport 🏋️‍♀️",         correct:3 },
+  { id:"salon",   label:"Salon de thé 🍵",              correct:4 },
+  { id:"douche",  label:"Douche 🚿",                    correct:5 },
+  { id:"diner",   label:"Dîner dans un beau resto 🍽️",  correct:6 },
+  { id:"moto",    label:"Balade en moto 🏍️",            correct:false },
+  { id:"shots",   label:"Bar à shots 🥃",               correct:false },
+  { id:"warzone", label:"Soirée Warzone 🎮",            correct:false },
+  { id:"running", label:"Course running 🏃‍♀️",          correct:false },
+];
+
+function Game2b({ onSuccess }) {
+  const [items, setItems]       = useState(() => [...DATE_ACTIVITIES].sort(() => Math.random() - 0.5));
+  const [dragging, setDragging] = useState(null);
+  const [feedback, setFeedback] = useState(null);
+  const dragOverIdx             = useRef(null);
+
+  const onDragStart = (e, idx) => { setDragging(idx); e.dataTransfer.effectAllowed = "move"; };
+  const onDragOver  = (e, idx) => { e.preventDefault(); dragOverIdx.current = idx; };
+  const onDrop      = (e, idx) => {
+    e.preventDefault();
+    if (dragging === null || dragging === idx) return;
+    const newItems = [...items];
+    const [moved] = newItems.splice(dragging, 1);
+    newItems.splice(idx, 0, moved);
+    setItems(newItems);
+    setDragging(null);
+    dragOverIdx.current = null;
+    setFeedback(null);
+  };
+
+  // Touch drag
+  const touchStartY = useRef(null);
+  const touchDragIdx = useRef(null);
+  const onTouchStart = (e, idx) => { touchStartY.current = e.touches[0].clientY; touchDragIdx.current = idx; setDragging(idx); };
+  const onTouchEnd   = (e) => {
+    const endY = e.changedTouches[0].clientY;
+    const delta = endY - (touchStartY.current || endY);
+    const direction = delta > 40 ? 1 : delta < -40 ? -1 : 0;
+    if (direction !== 0 && touchDragIdx.current !== null) {
+      const from = touchDragIdx.current;
+      const to = Math.max(0, Math.min(items.length - 1, from + direction));
+      if (from !== to) {
+        const newItems = [...items];
+        const [moved] = newItems.splice(from, 1);
+        newItems.splice(to, 0, moved);
+        setItems(newItems);
+      }
+    }
+    setDragging(null);
+    touchDragIdx.current = null;
+    setFeedback(null);
+  };
+
+  const check = () => {
+    // Check first 6 slots have correct items in right order
+    const first6 = items.slice(0, 6);
+    const allCorrect = first6.every((item, i) => item.correct === i + 1);
+    setFeedback(allCorrect ? "win" : "lose");
+    if (allCorrect) setTimeout(onSuccess, 1400);
+  };
+
+  const STEPS = ["1er", "2ème", "3ème", "4ème", "5ème", "6ème"];
+
+  return (
+    <div style={PAGE}>
+      <div style={CARD}>
+        <div style={STEP}>Épreuve 2b / 5</div>
+        <div style={TITLE}>🗓️ Organise le date parfait !</div>
+        <div style={SUB}>Remets les <strong>6 bonnes activités</strong> dans le bon ordre 👆<br/><span style={{fontSize:"0.78rem",color:"#c084fc"}}>Attention aux intrus ! 👀 Glisse pour réorganiser</span></div>
+
+        <div style={{display:"flex",flexDirection:"column",gap:"8px",marginBottom:"16px"}}>
+          {items.map((item, i) => (
+            <div key={item.id}
+              draggable
+              onDragStart={e => onDragStart(e, i)}
+              onDragOver={e => onDragOver(e, i)}
+              onDrop={e => onDrop(e, i)}
+              onTouchStart={e => onTouchStart(e, i)}
+              onTouchEnd={onTouchEnd}
+              style={{
+                display:"flex", alignItems:"center", gap:"12px",
+                padding:"12px 14px", borderRadius:"14px", cursor:"grab",
+                border: dragging===i ? "2px solid #c084fc" : "2px solid #f9a8d4",
+                background: dragging===i
+                  ? "linear-gradient(135deg,#f3e8ff,#fce7f3)"
+                  : feedback==="win"
+                  ? "linear-gradient(135deg,#d1fae5,#a7f3d0)"
+                  : "linear-gradient(135deg,#fff0f8,#f5e6ff)",
+                transition:"background 0.2s",
+                userSelect:"none", touchAction:"none",
+              }}>
+              <div style={{
+                width:"28px",height:"28px",borderRadius:"50%",
+                background:"linear-gradient(135deg,#f472b6,#c084fc)",
+                color:"white",fontWeight:"bold",fontSize:"0.8rem",
+                display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0
+              }}>{STEPS[i]}</div>
+              <div style={{flex:1,textAlign:"left",fontWeight:"600",color:"#7c3aed",fontSize:"0.92rem"}}>
+                {item.label}
+              </div>
+              <div style={{fontSize:"1.1rem",color:"#c084fc"}}>⠿</div>
+            </div>
+          ))}
+        </div>
+
+        {feedback==="lose" && (
+          <div style={{marginBottom:"10px"}}>
+            <div style={{color:"#ef4444",fontWeight:"bold",marginBottom:"8px"}}>❌ Pas tout à fait… Réessaie !</div>
+            <button style={btn("gray")} onClick={()=>{ setItems([...DATE_ACTIVITIES].sort(()=>Math.random()-0.5)); setFeedback(null); }}>🔄 Mélanger à nouveau</button>
+          </div>
+        )}
+        {feedback==="win" && <div style={{color:"#22c55e",fontWeight:"bold",marginBottom:"8px"}}>💕 Parfait ! Tu sais comment planifier un date !</div>}
+        {feedback!=="win" && <button style={btn("pink")} onClick={check}>Valider l'ordre 📅</button>}
+      </div>
+    </div>
+  );
+}
+
 // ─── GAME 3 ───────────────────────────────────────────
 function Game3({onSuccess}) {
   const [chosen,setChosen]=useState(null);
@@ -629,7 +752,7 @@ function Game3({onSuccess}) {
   return (
     <div style={PAGE}>
       <div style={CARD}>
-        <div style={STEP}>Épreuve 3 / 4</div>
+        <div style={STEP}>Épreuve 3 / 5</div>
         <div style={TITLE}>🏋️ Devine le muscle préféré de Lisa !</div>
         <div style={SUB}>Quel groupe musculaire fait craquer Lisa ? 👀</div>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px"}}>
@@ -748,7 +871,7 @@ function Game4({onSuccess}) {
   return (
     <div style={PAGE}>
       <div style={CARD}>
-        <div style={STEP}>Épreuve 4 / 4</div>
+        <div style={STEP}>Épreuve 4 / 5</div>
         <div style={TITLE}>🔐 Ouvre le cœur de Lisa !</div>
         <div style={SUB}>Glisse la clé avec le bon Pokémon vers le cœur 💜<br/><span style={{fontSize:"0.8rem",color:"#c084fc"}}>👆 Fais glisser avec ton doigt !</span><br/><span style={{fontSize:"0.75rem",color:"#f9a8d4",fontStyle:"italic"}}>Indice : c'est le Pokémon préféré de Lisa depuis l'enfance ⚡</span></div>
 
@@ -767,7 +890,7 @@ function Game4({onSuccess}) {
           </div>}
         {heartBurst &&
           <div style={{color:"#22c55e",fontWeight:"bold",fontSize:"1.1rem",marginBottom:"8px"}}>
-            🌟 C'est Mew ! Le cœur s'ouvre ! 💖
+            ⚡ C'est Pichu ! Le Pokémon préféré de Lisa depuis l'enfance ! 💖
           </div>}
 
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:"10px",touchAction:"none"}}>
@@ -862,7 +985,7 @@ function FinalScreen() {
       <Confetti active={confettiActive} count={confettiCount}/>
       <div style={{...CARD, zIndex:10, position:"relative"}}>
         <div style={{fontSize:"3.5rem",marginBottom:"8px",animation:"bounce 0.8s infinite"}}>🎉🍣🎊</div>
-        <div style={{fontSize:"2rem",fontWeight:"bold",color:"#b03080",marginBottom:"16px",fontFamily:"'Pacifico', cursive"}}>
+        <div style={{fontSize:"2rem",fontWeight:"bold",color:"#b03080",marginBottom:"16px",fontFamily:"'Fredoka One', cursive"}}>
           FÉLICITATIONS !!!
         </div>
 
@@ -872,7 +995,7 @@ function FinalScreen() {
           boxShadow:"0 4px 20px rgba(244,114,182,0.2)"
         }}>
           <div style={{fontSize:"1.5rem",marginBottom:"10px"}}>🫂💕</div>
-          <div style={{fontWeight:"800",color:"#b03080",fontSize:"1.15rem",marginBottom:"8px",fontFamily:"'Pacifico',cursive",lineHeight:"1.4"}}>
+          <div style={{fontWeight:"800",color:"#b03080",fontSize:"1.15rem",marginBottom:"8px",fontFamily:"'Fredoka One', cursive",lineHeight:"1.4"}}>
             Bravo !
           </div>
           <div style={{color:"#7c3aed",fontSize:"1rem",lineHeight:"1.6"}}>
@@ -913,7 +1036,8 @@ export default function App() {
       {screen==="welcome" && <WelcomeScreen onYes={()=>go("game1")} onNo={()=>go("no")}/>}
       {screen==="no"      && <NoScreen onBack={()=>go("welcome")}/>}
       {screen==="game1"   && <Game1 onSuccess={()=>go("game2")} onFail={()=>go("welcome")}/>}
-      {screen==="game2"   && <Game2 onSuccess={()=>go("game3")}/>}
+      {screen==="game2"   && <Game2 onSuccess={()=>go("game2b")}/>}
+      {screen==="game2b"  && <Game2b onSuccess={()=>go("game3")}/>}
       {screen==="game3"   && <Game3 onSuccess={()=>go("game4")}/>}
       {screen==="game4"   && <Game4 onSuccess={()=>go("final")}/>}
       {screen==="final"   && <FinalScreen/>}
