@@ -861,45 +861,37 @@ function FinalScreen() {
       <audio ref={audioRef} src={RICK_MP3} loop/>
       <Confetti active={confettiActive} count={confettiCount}/>
       <div style={{...CARD, zIndex:10, position:"relative"}}>
-        <div style={{fontSize:"3.5rem",marginBottom:"8px",animation:"bounce 0.8s infinite"}}>🎉💕🎊</div>
-        <div style={{fontSize:"2rem",fontWeight:"bold",color:"#b03080",marginBottom:"10px",fontFamily:"'Pacifico', cursive"}}>
+        <div style={{fontSize:"3.5rem",marginBottom:"8px",animation:"bounce 0.8s infinite"}}>🎉🍣🎊</div>
+        <div style={{fontSize:"2rem",fontWeight:"bold",color:"#b03080",marginBottom:"16px",fontFamily:"'Pacifico', cursive"}}>
           FÉLICITATIONS !!!
-        </div>
-        <div style={{fontSize:"1rem",color:"#7c3aed",marginBottom:"12px",fontWeight:"bold"}}>
-          Vous avez séduit Lisa P. 😭❤️
-        </div>
-        <div style={{
-          fontSize:"1.15rem", margin:"12px 0", padding:"16px", borderRadius:"18px",
-          background:"linear-gradient(135deg,#fce7f3,#f3e8ff)", border:"2px solid #f9a8d4",
-        }}>
-          🫂 Vous êtes désormais <strong>EN COUPLE</strong> avec Lisa !<br/>
-          <span style={{fontSize:"1.5rem"}}>😭❤️🎊</span>
         </div>
 
         <div style={{
-          background:"linear-gradient(135deg,#f5d0fe,#fce7f3)", borderRadius:"16px",
-          padding:"12px", marginBottom:"12px", border:"2px solid #e879f9"
+          margin:"0 0 16px 0", padding:"22px 18px", borderRadius:"22px",
+          background:"linear-gradient(135deg,#fce7f3,#f3e8ff)", border:"2.5px solid #f9a8d4",
+          boxShadow:"0 4px 20px rgba(244,114,182,0.2)"
         }}>
-          <div style={{fontWeight:"bold",color:"#86198f",marginBottom:"6px",fontSize:"0.95rem"}}>
-            🎵 Never Gonna Give You Up — Rick Astley 🎵
+          <div style={{fontSize:"1.5rem",marginBottom:"10px"}}>🫂💕</div>
+          <div style={{fontWeight:"800",color:"#b03080",fontSize:"1.15rem",marginBottom:"8px",fontFamily:"'Pacifico',cursive",lineHeight:"1.4"}}>
+            Bravo !
           </div>
+          <div style={{color:"#7c3aed",fontSize:"1rem",lineHeight:"1.6"}}>
+            Vous avez séduit <strong>Lisa P.</strong> 😭❤️<br/>
+            Vous êtes désormais <strong>EN COUPLE</strong> avec elle !
+          </div>
+          <div style={{fontSize:"2rem",marginTop:"12px"}}>🍣🍜🏋️‍♀️❤️📖🎹</div>
+        </div>
+
+        <div style={{marginBottom:"12px"}}>
           {!musicStarted ? (
             <button style={btn("pink")} onClick={startMusic}>▶️ Lancer la musique !</button>
           ) : (
-            <div>
-              <div style={{color:"#22c55e",fontWeight:"bold",fontSize:"0.88rem",marginBottom:"6px"}}>
-                🎶 ♩ ♪ Never Gonna Give You Up ♪ ♩ 🎶
-              </div>
-              <button style={{...btn("gray"), fontSize:"0.8rem", padding:"7px 16px"}}
-                onClick={()=>{ if(audioRef.current){ audioRef.current.pause(); audioRef.current.currentTime=0; setMusicStarted(false); }}}>
-                ⏹ Stop
-              </button>
-            </div>
+            <button style={{...btn("gray"), fontSize:"0.8rem", padding:"7px 16px"}}
+              onClick={()=>{ if(audioRef.current){ audioRef.current.pause(); audioRef.current.currentTime=0; setMusicStarted(false); }}}>
+              ⏹ Stop la musique
+            </button>
           )}
-
         </div>
-
-        <div style={{fontSize:"2rem",marginBottom:"10px"}}>🍣🍜🏋️‍♀️❤️📖🎹</div>
         <button style={{...btn("pink"), fontSize:"0.9rem", padding:"10px 20px"}} onClick={relaunchConfetti}>
           🎊 Encore des confettis !
         </button>
