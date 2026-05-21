@@ -262,20 +262,20 @@ const svgToDataUrl = (svg) => `data:image/svg+xml;base64,${btoa(unescape(encodeU
 // ══════════════════════════════════════════════════════
 const PROFILES = [
   { avatarIdx:0, name:"24 ans",
-    bio:"Militante à temps plein 🌈✊ • Vegane depuis le ventre de ma mère 🥦 • J'ai bloqué mon père sur insta pour mansplaining • Mon chat s'appelle Simone de Beauvoir 🐱 • Chercheuse en études de genre à Paris 8",
-    tags:["🚬 Fume (bio équitable)", "🍺 Kombucha militant", "🔮 Wicca", "🗳️ Extrême gauche"],
+    bio:"Militante à temps plein ✊\n\nVegane depuis le ventre de ma mère 🥦\n\nJ'ai bloqué mon père sur insta pour mansplaining\n\nMon chat s'appelle Simone de Beauvoir 🐱\n\nChercheuse en études de genre à Paris 8",
+    tags:["🚬 Fume", "🍺 Ne boit pas (kombucha only)", "🔮 Wicca", "🗳️ Extrême gauche"],
     match:false },
   { avatarIdx:1, name:"25 ans",
-    bio:"Amoureuse des chevaux 🐴 et des hommes qui ressemblent à des chevaux • CEO de ma propre vie • Mon signe lunaire est en Mercure ascendant Saturne donc on est pas compatibles probablement • J'ai fait 3 retraites ayahuasca cette année",
-    tags:["🚬 Ne fume pas (juste de la sauge)", "🍷 Vin biodynamique", "🌙 Chamanisme", "🗳️ Vote blanc cosmique"],
+    bio:"Amoureuse des chevaux 🐴\n\nCEO de ma propre vie\n\nMon signe lunaire est en Mercure ascendant Saturne donc on est sûrement pas compatibles\n\nJ'ai fait 3 retraites ayahuasca cette année 🌿",
+    tags:["🚬 Ne fume pas", "🍷 Boit du vin biodynamique", "🌙 Chamanisme & astrologie", "🗳️ Vote blanc"],
     match:false },
   { avatarIdx:2, name:"23 ans",
-    bio:"Ici pour trouver le père de mes 6 enfants 👶👶👶👶👶👶 • Coach de vie quantique ✨ • J'ai lu 50 nuances de Grey en 2 jours • Mon ex était toxique mais moi aussi un peu 🙃 • Je dors avec mes 4 chiens",
-    tags:["🚬 Fume (quand stressée, souvent)", "🍸 Rosé en semaine", "💫 Croit aux anges", "🗳️ La plus belle cravate"],
+    bio:"Ici pour trouver le père de mes 6 enfants 👶\n\nCoach de vie quantique reconvertie ✨\n\nMon ex était toxique mais moi aussi un peu 🙃\n\nJe dors avec mes 4 chiens dans le lit 🐶",
+    tags:["🚬 Fume", "🍸 Rosé en semaine", "💫 Croit aux anges gardiens", "🗳️ Vote la plus belle cravate"],
     match:false },
   { avatarIdx:3, name:"26 ans",
-    bio:"Powerlifter 🏋️‍♀️ • Pokémon master 🎮 • Les jeux vidéos de temps en temps 🕹️ • Je rêve de partir au Japon manger des ramen 🍜 • Vinyles & bonne musique 🎵",
-    tags:["🚬 Ne fume pas", "🥤 Ne boit pas", "✝️ Chrétienne", "🗳️ Droite"],
+    bio:"Powerlifter 🏋️‍♀️\n\nPokémon master & jeux vidéos de temps en temps 🎮\n\nJe rêve de partir au Japon manger des ramen 🍜\n\nVinyles & bonne musique 🎵",
+    tags:["🚬 Ne fume pas", "🥤 Ne boit pas", "✝️ Chrétienne"],
     match:true },
 ];
 
