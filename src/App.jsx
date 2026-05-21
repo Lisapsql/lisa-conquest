@@ -505,13 +505,7 @@ function Game1({onSuccess, onFail}) {
                   NOPE ✕
                 </div>
               )}
-              <img
-                src={svgToDataUrl(GIRL_AVATARS[profile.avatarIdx])}
-                alt={profile.name}
-                draggable="false"
-                style={{width:"120px",height:"120px",borderRadius:"50%",
-                  border:"3px solid #f9a8d4",display:"block",margin:"0 auto 14px"}}
-              />
+
               <div style={{fontWeight:"800",color:"#b03080",fontSize:"1.2rem",marginBottom:"6px",fontFamily:"'Pacifico',cursive"}}>
                 {profile.name}
               </div>
@@ -577,7 +571,7 @@ function Game2({onSuccess}) {
               color:"#7c3aed",fontWeight:sel.includes(i)?"bold":"normal",
               transition:"all 0.2s",fontSize:"0.88rem",
             }}>
-              {sel.includes(i)?"✅ ":"○ "}{p.text}
+              {sel.includes(i)?"✅ ":""}{p.text}
             </div>
           ))}
         </div>
