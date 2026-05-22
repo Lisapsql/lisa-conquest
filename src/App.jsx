@@ -267,7 +267,7 @@ const svgToDataUrl = (svg) => `data:image/svg+xml;base64,${btoa(unescape(encodeU
 const PROFILES = [
   { avatarIdx:0, name:"24 ans",
     bio:"Militante à temps plein ✊\n\nVegane depuis le ventre de ma mère 🥦\n\nJ'ai bloqué mon père sur insta pour mansplaining\n\nMon chat s'appelle Simone de Beauvoir 🐱\n\nChercheuse en études de genre à Paris 8",
-    tags:["🚬 Fume", "🍺 Ne boit pas (kombucha only)", "🔮 Wicca", "🗳️ Extrême gauche"],
+    tags:["🚬 Ne fume pas", "🍺 Ne boit pas (kombucha only)", "🔮 Wicca", "🗳️ Extrême gauche"],
     match:false },
   { avatarIdx:1, name:"25 ans",
     bio:"Amoureuse des chevaux 🐴\n\nCEO de ma propre vie\n\nMon signe lunaire est en Mercure ascendant Saturne donc on est sûrement pas compatibles\n\nJ'ai fait 3 retraites ayahuasca cette année 🌿",
@@ -319,9 +319,9 @@ const KEYS_DATA = [
   {key:"gloupti",    name:"Gloupti",     color:"#bbffd0"},
   {key:"emolga",     name:"Emolga",      color:"#fff3b0"},
   {key:"brindibou",  name:"Brindibou",   color:"#d1fae5"},
-  {key:"denticrisse",name:"Denticrisse", color:"#fde8ff"},
-  {key:"mew",        name:"Mew",         color:"#f5d0fe"},
   {key:"pichu",      name:"Pichu ⚡",    color:"#fffbcc", correct:true},
+  {key:"mew",        name:"Mew",         color:"#f5d0fe"},
+  {key:"denticrisse",name:"Denticrisse", color:"#fde8ff"},
 ];
 
 // ── POKÉMON IMAGES (base64) ─────────────────────────────────
@@ -391,12 +391,12 @@ function NoScreen({onBack}) {
   return (
     <div style={PAGE}>
       <div style={CARD}>
-        <div style={{fontSize:"3.5rem",marginBottom:"12px"}}>💔👺👹😤</div>
+        <div style={{fontSize:"3.5rem",marginBottom:"12px"}}>💔😤</div>
         <div style={TITLE}>Très bien…</div>
         <div style={SUB}>
           De toute façon, Lisa n'avait pas besoin<br/>
-          de quelqu'un d'aussi lâche que vous. 😤<br/><br/>
-          <span style={{fontSize:"0.85rem",color:"#c084fc"}}>Elle ira manger des ramen au Japon sans vous. 🍜🇯🇵</span>
+          de quelqu'un d'aussi lâche que vous.<br/><br/>
+          <span style={{fontSize:"0.85rem",color:"#c084fc"}}>Elle ira manger des ramen au Japon sans vous.</span>
         </div>
         <button style={btn("pink")} onClick={onBack}>← En fait… je change d'avis !</button>
       </div>
@@ -470,8 +470,8 @@ function Game1({onSuccess, onFail}) {
     <div style={PAGE}>
       <div style={{...CARD, overflow:"hidden"}}>
         <div style={STEP}>Épreuve 1 / 6</div>
-        <div style={TITLE}>🔍 Trouvez Lisa sur Hinge !</div>
-        <div style={SUB}>💚 Swipez à droite si c'est elle · ✕ sinon</div>
+        <div style={TITLE}>Trouve Lisa sur Hinge !</div>
+        <div style={SUB}>Swipe</div>
 
         {result==="win" && (
           <div style={{color:"#22c55e",fontWeight:"bold",fontSize:"1.1rem",margin:"20px 0"}}>
@@ -586,8 +586,8 @@ function Game2({onSuccess}) {
     <div style={PAGE}>
       <div style={CARD}>
         <div style={STEP}>Épreuve 2 / 6</div>
-        <div style={TITLE}>💬 Choisissez vos phrases d'accroche !</div>
-        <div style={SUB}>Sélectionnez TOUTES les phrases qui pourraient séduire Lisa ✨</div>
+        <div style={TITLE}>Choisissez vos phrases d'accroche !</div>
+        <div style={SUB}>Maintenant que vous l'avez trouvée… il faut choisir des phrases d'accroche !</div>
         <div style={{display:"flex",flexDirection:"column",gap:"8px",marginBottom:"14px"}}>
           {PHRASES.map((p,i)=>(
             <div key={i} onClick={()=>feedback!=="win"&&toggle(i)} style={{
@@ -758,10 +758,10 @@ function Game2b({ onSuccess }) {
     <div style={PAGE}>
       <div style={CARD}>
         <div style={STEP}>Épreuve 3 / 6</div>
-        <div style={TITLE}>🗓️ Organise le date parfait !</div>
+        <div style={TITLE}>Organise le date parfait !</div>
         <div style={SUB}>
-          Glisse les <strong>6 bonnes activités</strong> dans les emplacements 👇<br/>
-          <span style={{fontSize:"0.75rem",color:"#c084fc"}}>Attention aux intrus ! 👀</span>
+          La douce Lisa a succombé à votre séduction,<br/>organisez-lui un date parfait 🌸<br/>
+          <span style={{fontSize:"0.75rem",color:"#c084fc"}}>Glisse les 6 bonnes activités — attention aux intrus !</span>
         </div>
 
         {/* 6 SLOTS */}
@@ -903,7 +903,7 @@ function GameFlappy({ onSuccess }) {
         const topH = 60 + Math.random() * (FLAPPY_H - GAP - 120);
         s.pipes.push({ x: FLAPPY_W + PIPE_W, topH, scored:false });
       }
-      const currentSpeed = PIPE_SPEED + (s.score >= 5 ? (s.score - 4) * 0.25 : 0);
+      const currentSpeed = PIPE_SPEED * 2 + (s.score >= 5 ? (s.score - 4) * 0.4 : 0);
       s.pipes.forEach(p => p.x -= currentSpeed);
       s.pipes = s.pipes.filter(p => p.x > -PIPE_W - 10);
 
@@ -996,7 +996,7 @@ function GameFlappy({ onSuccess }) {
     <div style={{...PAGE, padding:"8px"}}>
       <div style={{...CARD, padding:"16px 12px"}}>
         <div style={STEP}>Épreuve 4 / 6</div>
-        <div style={{...TITLE, marginBottom:"4px"}}>🐦 Flappy Lisa !</div>
+        <div style={{...TITLE, marginBottom:"4px"}}>Flappy Lisa !</div>
         <div style={{...SUB, marginBottom:"10px", fontSize:"0.82rem"}}>
           Passe {FLAPPY_WIN} obstacles pour continuer 💪<br/>
           <span style={{fontSize:"0.75rem",color:"#c084fc"}}>Tape pour sauter !</span>
@@ -1006,7 +1006,14 @@ function GameFlappy({ onSuccess }) {
             style={{display:"block",width:"100%",maxWidth:"360px",cursor:"pointer"}}
             onClick={handleTap} onTouchStart={handleTap}
           />
-          {phase==="intro" && overlay("🐦","Flappy Lisa !","Passe "+FLAPPY_WIN+" tuyaux 💕","▶️ Lancer !")}
+          {phase==="intro" && (
+            <div style={{position:"absolute",inset:0,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",background:"rgba(252,228,243,0.9)"}}>
+              <img src={LISA_FACE} alt="Lisa" style={{width:"60px",height:"60px",borderRadius:"50%",border:"3px solid #f9a8d4",marginBottom:"8px"}}/>
+              <div style={{fontWeight:"bold",color:"#b03080",fontSize:"1.1rem",marginBottom:"4px",fontFamily:"'Comfortaa',cursive"}}>Flappy Lisa !</div>
+              <div style={{color:"#7c3aed",fontSize:"0.85rem",marginBottom:"16px"}}>Passe {FLAPPY_WIN} tuyaux 💕</div>
+              <button style={{...btn("pink"),fontSize:"0.95rem"}} onClick={jump}>▶️ Lancer !</button>
+            </div>
+          )}
           {phase==="dead"  && overlay("😵","Aïe ! Score : "+score,"Lisa est dans les étoiles 😂","🔄 Réessayer")}
           {phase==="win"   && (
             <div style={{position:"absolute",inset:0,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",background:"rgba(252,228,243,0.92)"}}>
@@ -1151,8 +1158,8 @@ function Game4({onSuccess}) {
     <div style={PAGE}>
       <div style={CARD}>
         <div style={STEP}>Épreuve 6 / 6</div>
-        <div style={TITLE}>🔐 Ouvre le cœur de Lisa !</div>
-        <div style={SUB}>Glisse la clé avec le bon Pokémon vers le cœur 💜<br/><span style={{fontSize:"0.8rem",color:"#c084fc"}}>👆 Fais glisser avec ton doigt !</span><br/><span style={{fontSize:"0.75rem",color:"#f9a8d4",fontStyle:"italic"}}>Indice : c'est le Pokémon préféré de Lisa depuis l'enfance ⚡</span></div>
+        <div style={TITLE}>Trouve la clé du cœur de Lisa !</div>
+        <div style={SUB}>Maintenant que tu connais bien Lisa… trouve la clé de son cœur.<br/>Le Pokémon préféré de son enfance.<br/><span style={{fontSize:"0.78rem",color:"#c084fc"}}>Fais glisser avec ton doigt</span></div>
 
         <div ref={heartRef} style={{
           width:"90px", height:"90px", marginBottom:"14px",
@@ -1296,7 +1303,7 @@ function FinalScreen() {
             Bravo !
           </div>
           <div style={{color:"#7c3aed",fontSize:"1rem",lineHeight:"1.6"}}>
-            Vous avez séduit <strong>Lisa P.</strong> 😭❤️<br/>
+            Vous avez séduit <strong>Lisouille</strong><br/>
             Vous êtes désormais <strong>EN COUPLE</strong> avec elle !
           </div>
           <div style={{fontSize:"2rem",marginTop:"12px"}}>🍣🍜❤️📖🎹</div>
@@ -1319,8 +1326,7 @@ function FinalScreen() {
             </>
           ) : coupleConfirmed === "yes" ? (
             <div style={{fontSize:"1.05rem",color:"#b03080",fontWeight:"bold"}}>
-              😘💋 Vous pouvez vous embrasser !<br/>
-              <span style={{fontSize:"1.5rem"}}>🎊💍💏🎊</span>
+              Vous pouvez vous embrasser ! 😘💍
             </div>
           ) : (
             <div>
@@ -1335,21 +1341,18 @@ function FinalScreen() {
           )}
         </div>
 
-        <div style={{marginBottom:"12px"}}>
-          {!musicStarted && (
-            <button style={btn("pink")} onClick={startMusic}>▶️ Lancer la musique !</button>
-          )}
-        </div>
+
         <div style={{display:"flex",justifyContent:"center",gap:"10px",flexWrap:"wrap",alignItems:"center"}}>
           <button style={{...btn("pink"), fontSize:"0.88rem", padding:"10px 18px"}} onClick={relaunchConfetti}>
             🎊 Confettis !
           </button>
-          {musicStarted && (
-            <button style={{...btn("gray"), fontSize:"0.88rem", padding:"10px 18px"}}
-              onClick={()=>{ if(audioRef.current){ audioRef.current.pause(); audioRef.current.currentTime=0; setMusicStarted(false); }}}>
-              ⏹ Musique
-            </button>
-          )}
+          <button style={{...btn(musicStarted?"gray":"pink"), fontSize:"0.88rem", padding:"10px 18px"}}
+            onClick={()=>{
+              if(!musicStarted){ startMusic(); }
+              else { if(audioRef.current){ audioRef.current.pause(); audioRef.current.currentTime=0; setMusicStarted(false); }}
+            }}>
+            {musicStarted ? "⏹ Musique" : "▶️ Musique"}
+          </button>
         </div>
       </div>
       <style>{`@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}`}</style>
