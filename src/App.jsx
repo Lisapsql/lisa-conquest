@@ -265,24 +265,23 @@ const svgToDataUrl = (svg) => `data:image/svg+xml;base64,${btoa(unescape(encodeU
 //  DATA
 // ══════════════════════════════════════════════════════
 const PROFILES = [
-  { avatarIdx:0, name:"24 ans",
-    bio:"Militante à temps plein ✊\n\nVegane depuis le ventre de ma mère 🥦\n\nJ'ai bloqué mon père sur insta pour mansplaining\n\nMon chat s'appelle Simone de Beauvoir 🐱\n\nChercheuse en études de genre à Paris 8",
-    tags:["🚬 Ne fume pas", "🍺 Ne boit pas (kombucha only)", "🔮 Wicca", "🗳️ Extrême gauche"],
+  { avatarIdx:0, name:"26 ans",
+    bio:"Militante à temps plein ✊\n🥦 Vegane depuis le ventre de ma mère\n🐱 Mon chat s'appelle Simone de Beauvoir\n📚 Chercheuse en études de genre à Paris 8",
+    tags:["🚬 Ne fume pas", "🍺 Kombucha only", "🔮 Wicca", "🗳️ Extrême gauche"],
     match:false },
   { avatarIdx:1, name:"25 ans",
-    bio:"Amoureuse des chevaux 🐴\n\nCEO de ma propre vie\n\nMon signe lunaire est en Mercure ascendant Saturne donc on est sûrement pas compatibles\n\nJ'ai fait 3 retraites ayahuasca cette année 🌿",
-    tags:["🚬 Ne fume pas", "🍷 Boit du vin biodynamique", "🌙 Chamanisme & astrologie", "🗳️ Vote blanc"],
+    bio:"🐴 Amoureuse des chevaux\n🔮 Mon signe est en Mercure ascendant Saturne\n🌿 3 retraites ayahuasca cette année\n✨ CEO de ma propre vie",
+    tags:["🚬 Ne fume pas", "🍷 Vin biodynamique", "🌙 Chamanisme & astrologie", "🗳️ Vote blanc"],
     match:false },
-  { avatarIdx:2, name:"23 ans",
-    bio:"Ici pour trouver le père de mes 6 enfants 👶\n\nCoach de vie quantique reconvertie ✨\n\nMon ex était toxique mais moi aussi un peu 🙃\n\nJe dors avec mes 4 chiens dans le lit 🐶",
+  { avatarIdx:2, name:"26 ans",
+    bio:"👶 Ici pour trouver le père de mes 6 enfants\n✨ Coach de vie quantique reconvertie\n🙃 Mon ex était toxique mais moi aussi un peu\n🐶 Je dors avec mes 4 chiens dans le lit",
     tags:["🚬 Fume", "🍸 Rosé en semaine", "💫 Croit aux anges gardiens", "🗳️ Vote la plus belle cravate"],
     match:false },
   { avatarIdx:3, name:"26 ans",
-    bio:"Baby powerlifter 🏋️‍♀️\n\nPokémon master & jeux vidéos de temps en temps 🎮\n\nPassionnée de culture japonaise & ramen 🍜🇯🇵\n\nJ'aime la musique en tout genre 🎵 • Piano 🎹 • Lecture 📖\n\nJe suis très rancunière et têtue… car j'ai souvent raison 😤",
+    bio:"🏋️‍♀️ Baby powerlifter\n🎮 Pokémon master & jeux vidéos de temps en temps\n🍜 Passionnée de culture japonaise & ramen\n🎵 J'aime la musique en tout genre • Piano • Lecture\n😤 Très rancunière et têtue… car j'ai souvent raison",
     tags:["🚬 Ne fume pas", "🥤 Ne boit pas", "✝️ Chrétienne"],
     match:true },
 ];
-
 const PHRASES = [
   { text:"Je peux voir ta collection de cartes Pokémon ? 🃏", ok:true },
   { text:"J'adore les filles chatains ! 👧", ok:false },
@@ -396,7 +395,7 @@ function NoScreen({onBack}) {
         <div style={SUB}>
           De toute façon, Lisa n'avait pas besoin<br/>
           de quelqu'un d'aussi lâche que vous.<br/><br/>
-          <span style={{fontSize:"0.85rem",color:"#c084fc"}}>Elle ira manger des ramen au Japon sans vous.</span>
+          <span style={{fontSize:"0.85rem",color:"#c084fc"}}>Elle ira manger des ramen au Japon seule.</span>
         </div>
         <button style={btn("pink")} onClick={onBack}>← En fait… je change d'avis !</button>
       </div>
@@ -430,9 +429,13 @@ function Game1({onSuccess, onFail}) {
       } else if (right && !profile.match) {
         setResult("lose");
       } else {
-        // left swipe — go to next or loop
-        const next = (index + 1) % PROFILES.length;
-        setIndex(next);
+        // left swipe — go to next, if all passed show error
+        const next = index + 1;
+        if (next >= PROFILES.length) {
+          setResult("allpassed");
+        } else {
+          setIndex(next);
+        }
       }
     }, 400);
   };
@@ -481,6 +484,13 @@ function Game1({onSuccess, onFail}) {
         {result==="lose" && (
           <div style={{margin:"20px 0"}}>
             <div style={{color:"#ef4444",fontWeight:"bold",marginBottom:"12px",fontSize:"1rem"}}>❌ Ce n'est pas Lisa… 😬</div>
+            <button style={btn("pink")} onClick={onFail}>Recommencer depuis le début</button>
+          </div>
+        )}
+        {result==="allpassed" && (
+          <div style={{margin:"20px 0"}}>
+            <div style={{color:"#ef4444",fontWeight:"bold",marginBottom:"8px",fontSize:"1rem"}}>😬 Vous avez passé tous les profils sans trouver Lisa…</div>
+            <div style={{fontSize:"0.85rem",color:"#9060a0",marginBottom:"10px"}}>Elle était pourtant là, sous vos yeux !</div>
             <button style={btn("pink")} onClick={onFail}>Recommencer depuis le début</button>
           </div>
         )}
@@ -758,7 +768,7 @@ function Game2b({ onSuccess }) {
     <div style={PAGE}>
       <div style={CARD}>
         <div style={STEP}>Épreuve 3 / 6</div>
-        <div style={TITLE}>Organise le date parfait !</div>
+        <div style={{...TITLE, fontSize:"1.3rem"}}>Organise le date parfait !</div>
         <div style={SUB}>
           La douce Lisa a succombé à votre séduction,<br/>organisez-lui un date parfait 🌸<br/>
           <span style={{fontSize:"0.75rem",color:"#c084fc"}}>Glisse les 6 bonnes activités — attention aux intrus !</span>
@@ -998,7 +1008,8 @@ function GameFlappy({ onSuccess }) {
         <div style={STEP}>Épreuve 4 / 6</div>
         <div style={{...TITLE, marginBottom:"4px"}}>Flappy Lisa !</div>
         <div style={{...SUB, marginBottom:"10px", fontSize:"0.82rem"}}>
-          Passe {FLAPPY_WIN} obstacles pour continuer 💪<br/>
+          C'est bien moussaillon, mais le chemin est parsemé d'embûches !<br/>
+          Passe 10 obstacles pour continuer ta quête ⚔️<br/>
           <span style={{fontSize:"0.75rem",color:"#c084fc"}}>Tape pour sauter !</span>
         </div>
         <div style={{position:"relative",borderRadius:"18px",overflow:"hidden",border:"2px solid #f9a8d4",touchAction:"none"}}>
@@ -1010,7 +1021,7 @@ function GameFlappy({ onSuccess }) {
             <div style={{position:"absolute",inset:0,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",background:"rgba(252,228,243,0.9)"}}>
               <img src={LISA_FACE} alt="Lisa" style={{width:"60px",height:"60px",borderRadius:"50%",border:"3px solid #f9a8d4",marginBottom:"8px"}}/>
               <div style={{fontWeight:"bold",color:"#b03080",fontSize:"1.1rem",marginBottom:"4px",fontFamily:"'Comfortaa',cursive"}}>Flappy Lisa !</div>
-              <div style={{color:"#7c3aed",fontSize:"0.85rem",marginBottom:"16px"}}>Passe {FLAPPY_WIN} tuyaux 💕</div>
+              <div style={{color:"#7c3aed",fontSize:"0.82rem",marginBottom:"16px",textAlign:"center",padding:"0 10px"}}>C'est bien moussaillon, mais le chemin est parsemé d'embûches !<br/>Passe 10 obstacles pour continuer ta quête ⚔️</div>
               <button style={{...btn("pink"),fontSize:"0.95rem"}} onClick={jump}>▶️ Lancer !</button>
             </div>
           )}
@@ -1326,7 +1337,7 @@ function FinalScreen() {
             </>
           ) : coupleConfirmed === "yes" ? (
             <div style={{fontSize:"1.05rem",color:"#b03080",fontWeight:"bold"}}>
-              Vous pouvez vous embrasser ! 😘💍
+              Vous pouvez vous embrasser ! 😘
             </div>
           ) : (
             <div>
