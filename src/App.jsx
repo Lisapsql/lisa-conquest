@@ -374,7 +374,7 @@ function WelcomeScreen({onYes, onNo}) {
   return (
     <div style={PAGE}>
       <div style={CARD}>
-        <div style={{fontSize:"3rem",marginBottom:"10px",display:"inline-block",animation:"pulse 1.5s infinite"}}>❤️🔥</div>
+        <div style={{fontSize:"3rem",marginBottom:"10px",display:"inline-block",animation:"pulse 1.5s infinite"}}>🤺❤️</div>
         <div style={{...TITLE, fontSize:"1.5rem"}}>Voulez-vous séduire la jolie petite Lisouille ?</div>
         <div style={SUB}>⚔️ Une quête épique vous attend, valeureux prétendant.<br/>Êtes-vous prêt à relever les défis ?</div>
         <div style={{display:"flex",justifyContent:"center",flexWrap:"wrap"}}>
@@ -1282,7 +1282,6 @@ function FinalScreen() {
       <audio ref={audioRef} src={RICK_MP3} loop/>
       <Confetti active={confettiActive} count={confettiCount}/>
       <div style={{...CARD, zIndex:10, position:"relative"}}>
-        <div style={{fontSize:"3.5rem",marginBottom:"8px",animation:"bounce 0.8s infinite"}}>🎉🍣🎊</div>
         <div style={{fontSize:"2rem",fontWeight:"bold",color:"#b03080",marginBottom:"16px",fontFamily:"'Comfortaa', cursive"}}>
           FÉLICITATIONS !!!
         </div>
@@ -1300,59 +1299,58 @@ function FinalScreen() {
             Vous avez séduit <strong>Lisa P.</strong> 😭❤️<br/>
             Vous êtes désormais <strong>EN COUPLE</strong> avec elle !
           </div>
-          <div style={{fontSize:"2rem",marginTop:"12px"}}>🍣🍜🏋️‍♀️❤️📖🎹</div>
+          <div style={{fontSize:"2rem",marginTop:"12px"}}>🍣🍜❤️📖🎹</div>
         </div>
 
         {/* Bouton couple */}
-        {!coupleConfirmed ? (
-          <div style={{marginBottom:"14px"}}>
-            <div style={{fontSize:"0.95rem",color:"#9060a0",marginBottom:"10px"}}>
-              Mais encore… êtes-vous prêt(e) à officialiser ? 👀
+        <div style={{
+          marginBottom:"14px", padding:"16px", borderRadius:"18px",
+          background:"linear-gradient(135deg,#fce7f3,#f3e8ff)", border:"2px solid #f9a8d4",
+        }}>
+          {!coupleConfirmed ? (
+            <>
+              <div style={{fontSize:"0.92rem",color:"#9060a0",marginBottom:"12px",fontWeight:"600"}}>
+                Mais encore… êtes-vous prêt(e) à officialiser ?
+              </div>
+              <div style={{display:"flex",justifyContent:"center",gap:"10px",flexWrap:"wrap"}}>
+                <button style={btn("pink")} onClick={()=>setCoupleConfirmed("yes")}>💍 Oui, je veux !</button>
+                <button style={btn("gray")} onClick={()=>setCoupleConfirmed("no")}>J'ai besoin d'y réfléchir…</button>
+              </div>
+            </>
+          ) : coupleConfirmed === "yes" ? (
+            <div style={{fontSize:"1.05rem",color:"#b03080",fontWeight:"bold"}}>
+              😘💋 Vous pouvez vous embrasser !<br/>
+              <span style={{fontSize:"1.5rem"}}>🎊💍💏🎊</span>
             </div>
-            <div style={{display:"flex",justifyContent:"center",gap:"10px",flexWrap:"wrap"}}>
-              <button style={btn("pink")} onClick={()=>setCoupleConfirmed("yes")}>💍 Oui, je veux !</button>
-              <button style={btn("gray")} onClick={()=>setCoupleConfirmed("no")}>😅 J'ai besoin d'y réfléchir...</button>
+          ) : (
+            <div>
+              <div style={{fontSize:"0.92rem",color:"#dc2626",fontWeight:"bold",marginBottom:"8px"}}>
+                😤 Lisa est très déçue de vous.
+              </div>
+              <button style={{...btn("pink"), fontSize:"0.85rem", padding:"8px 18px"}}
+                onClick={()=>setCoupleConfirmed(null)}>
+                Pardon, je change d'avis ! 🙏
+              </button>
             </div>
-          </div>
-        ) : coupleConfirmed === "yes" ? (
-          <div style={{
-            marginBottom:"14px", padding:"16px", borderRadius:"18px",
-            background:"linear-gradient(135deg,#fce7f3,#f3e8ff)", border:"2px solid #f9a8d4",
-            fontSize:"1.1rem", color:"#b03080", fontWeight:"bold",
-          }}>
-            😘💋 Vous pouvez vous embrasser !<br/>
-            <span style={{fontSize:"1.5rem"}}>🎊💍💏🎊</span>
-          </div>
-        ) : (
-          <div style={{
-            marginBottom:"14px", padding:"14px", borderRadius:"18px",
-            background:"#fee2e2", border:"2px solid #fca5a5",
-            fontSize:"0.95rem", color:"#dc2626", fontWeight:"bold",
-          }}>
-            😤 Lisa est très déçue de vous.<br/>
-            <button style={{...btn("pink"), marginTop:"8px", fontSize:"0.85rem", padding:"8px 18px"}}
-              onClick={()=>setCoupleConfirmed(null)}>
-              Pardon, je change d'avis ! 🙏
-            </button>
-          </div>
-        )}
+          )}
+        </div>
 
         <div style={{marginBottom:"12px"}}>
           {!musicStarted && (
             <button style={btn("pink")} onClick={startMusic}>▶️ Lancer la musique !</button>
           )}
         </div>
-        <button style={{...btn("pink"), fontSize:"0.9rem", padding:"10px 20px"}} onClick={relaunchConfetti}>
-          🎊 Encore des confettis !
-        </button>
-        {musicStarted && (
-          <div style={{marginTop:"10px"}}>
-            <button style={{...btn("gray"), fontSize:"0.8rem", padding:"7px 16px"}}
+        <div style={{display:"flex",justifyContent:"center",gap:"10px",flexWrap:"wrap",alignItems:"center"}}>
+          <button style={{...btn("pink"), fontSize:"0.88rem", padding:"10px 18px"}} onClick={relaunchConfetti}>
+            🎊 Confettis !
+          </button>
+          {musicStarted && (
+            <button style={{...btn("gray"), fontSize:"0.88rem", padding:"10px 18px"}}
               onClick={()=>{ if(audioRef.current){ audioRef.current.pause(); audioRef.current.currentTime=0; setMusicStarted(false); }}}>
-              ⏹ Stop la musique
+              ⏹ Musique
             </button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
       <style>{`@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}`}</style>
     </div>
